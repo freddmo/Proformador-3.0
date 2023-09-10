@@ -1,4 +1,4 @@
-﻿/* ---------------------------------------------------EMPIEZA - REGION PARA TENER EL TIPO DE PROFORMA*/
+﻿// ---------------------------------------------------SECCION PARA TENER EL TIPO DE PROFORMA
 $(document).ready(function () {
 
     fetch("/Proformar/ListaTipoProforma")
@@ -19,24 +19,16 @@ $(document).ready(function () {
     const selectElement = document.getElementById('cboTipoProforma');
     selectElement.addEventListener('change', function () {
         
-        // Step 2: Retrieve the selected option
+        
         const selectedOption = selectElement.options[selectElement.selectedIndex];
-
-        // Step 3: Access the object or its properties
        
         const selectedText = selectedOption.text;
 
-        // Step 4: Log the selected object or its properties
-        
         console.log('Selected Text:', selectedText);
-
-
 
         if (selectedText === "Infima Cuantia") {
 
-       
         } else if (selectedText === "General") {
-
             $("#txtCodigoInfima").val(0)
         }
 
@@ -49,9 +41,9 @@ $(document).on("select2:open", function () {
     document.querySelector(".select2-search__field").focus();
 })
 
-/* ---------------------------------------------------TERMINA - REGION PARA TENER EL TIPO DE PROFORMA*/
 
-/*---------------------------------------------------EMPIEZA - REGION PARA BUSCAR EL HOSPITAL, OBTENER INFORMACION Y RELLENAR LA PROFORMA*/
+
+//---------------------------------SECCION PARA BUSCAR EL HOSPITAL, OBTENER INFORMACION Y RELLENAR LA PROFORMA
 
 $("#cboBuscarHospital").select2({
     ajax: {
@@ -89,7 +81,7 @@ $("#cboBuscarHospital").select2({
     
 });
 
-/*#SECCION PARA MOSTRAR EL CONTENIDO CUANDO BUSCAS UN HOSPITAL*/
+//---------------------------------SECCION PARA MOSTRAR EL CONTENIDO CUANDO BUSCAS UN HOSPITAL
 function formatoResultados(data) {
 
     if (data.loading)
@@ -112,7 +104,7 @@ $(document).on("select2:open", function () {
     document.querySelector(".select2-search__field").focus();
 })
 
-/*#SECCION PARA PONER INFORMACION EN LOS TEXTBOX CUANDO SELECCION UN HOSPITAL*/
+//---------------------------------SECCION PARA PONER INFORMACION EN LOS TEXTBOX CUANDO SELECCION UN HOSPITAL
 
 $("#cboBuscarHospital").on("select2:select", function (e) {
     const data = e.params.data;
@@ -130,11 +122,11 @@ $("#cboBuscarHospital").on("select2:select", function (e) {
     $("#cboBuscarHospital").val("").trigger("change")
 })
 
-/*---------------------------------------------------TERMINA - REGION PARA BUSCAR EL HOSPITAL, OBTENER INFORMACION Y RELLENAR LA PROFORMA*/
 
 
 
-/*---------------------------------------------------EMPIEZA - REGION PARA BUSCAR EL PRODUCTO, PONER INFORMACION, Y RELLENAR LA TABLA */
+
+/*---------------------------------------------------SECCION PARA BUSCAR EL PRODUCTO, PONER INFORMACION, Y RELLENAR LA TABLA */
 /*-----BUSCADOR-PARA-LAS-3-PROFORMAS-----*/
 $("#cboBuscarProducto").select2({
     ajax: {
@@ -318,7 +310,7 @@ function formatoProductosResultados(data) {
 }
 
 
-/*---------------------------------------------------EMPIEZA - REGION 3 EMPRESAS PARA INGRESAR PRODUCTOS */
+/*---------------------------------------------------REGION 3 EMPRESAS PARA INGRESAR PRODUCTOS */
 let ProductosParaProformaA = [];
 let ProductosParaProformaB = [];
 let ProductosParaProformaC = [];
@@ -554,11 +546,7 @@ function mostrarProducto_Precios() {
 
 }
 
-/*---------------------------------------------------TERMINA - REGION 3 EMPRESAS PARA INGRESAR PRODUCTOS */
-
-
-
-/*---------------------------------------------------EMPIEZA - REGION GMC PARA INGRESAR PRODUCTOS */
+/*---------------------------------------------------REGION GMC PARA INGRESAR PRODUCTOS */
 let ProductosParaProformaGMC = [];
 $("#cboBuscarProductoGMC").on("select2:select", function (e) {
     const data = e.params.data;
@@ -690,11 +678,7 @@ function mostrarProducto_PreciosGMC() {
     $("#txtTotalGMC").val(totalGMC.toFixed(4))
 }
 
-/*---------------------------------------------------TERMINA - REGION GMC PARA INGRESAR PRODUCTOS */
-
-
-
-/*---------------------------------------------------EMPIEZA - REGION IMSUMED PARA INGRESAR PRODUCTOS */
+/*---------------------------------------------------REGION IMSUMED PARA INGRESAR PRODUCTOS */
 
 let ProductosParaProformaIMS = [];
 $("#cboBuscarProductoIMS").on("select2:select", function (e) {
@@ -827,11 +811,7 @@ function mostrarProducto_PreciosIMS() {
     $("#txtTotalIMS").val(totalims.toFixed(4))
 }
 
-/*---------------------------------------------------TERMINA - REGION IMSUMED PARA INGRESAR PRODUCTOS */
-
-
-
-/*---------------------------------------------------EMPIEZA - REGION GERMEDIC PARA INGRESAR PRODUCTOS */
+/*---------------------------------------------------REGION GERMEDIC PARA INGRESAR PRODUCTOS */
 
 let ProductosParaProformaGER = [];
 $("#cboBuscarProductoGER").on("select2:select", function (e) {
@@ -964,8 +944,6 @@ function mostrarProducto_PreciosGER() {
 
 }
 
-/*---------------------------------------------------TERMINA - REGION GERMEDIC PARA INGRESAR PRODUCTOS */
-
 
 /*#SECCION PARA ELIMINAR UN RECORD */
 $(document).on("click", "button.btn-eliminar", function () {
@@ -1020,7 +998,7 @@ function registrarProforma(proformaData) {
 }
 
 
-/*---------------------------------------------------EMPIEZA - REGION PARA TERMINAR LA PROFORMA */
+/*---------------------------------------------------SECCION PARA TERMINAR LA PROFORMA */
 let vmDetalleProductoProforma = [];
 
 $("#btnTerminarProforma").click(function () {
@@ -1857,59 +1835,7 @@ function populateTableBIMS(responseData) {
     }
 }
 
-//function populateTableBIMS(responseData, indexToPopulate) {
-//    $("#tbimsProducto tbody").html("");
 
-//    const data = responseData[indexToPopulate];
-
-//    if (data && data.detalleProductoProformas && Array.isArray(data.detalleProductoProformas)) {
-//        const detalleProductos = data.detalleProductoProformas;
-
-//        const detalleProductosHTML = detalleProductos.map(producto => {
-//            ProductosParaProformaB.push({
-//                idProducto: producto.idProducto,
-//                cpc: producto.cpc,
-//                medicamento: producto.medicamento,
-//                ff: producto.ff,
-//                dc: producto.dc,
-//                fc: producto.fc,
-//                concentracion: producto.concentracion,
-//                presentacion: producto.presentacion,
-//                iva: producto.iva,
-//                cantidad: producto.cantidad,
-//                precioGmc: "0",
-//                precioIms: producto.precioIms,
-//                precioGer: "0",
-//                totalUgmc: "0",
-//                totalUims: producto.totalUims,
-//                totalUger: "0"
-//            });
-
-//            return $("<tr>").append(
-//                $("<td>").append(
-//                    $("<button>").addClass("btn btn-danger btn-eliminar btn-sm").append(
-//                        $("<i>").addClass("fas fa-trash-alt")
-//                    ).data("idProducto", producto.idProducto)
-//                ),
-//                $("<td>").text(producto.cpc),
-//                $("<td>").text(producto.medicamento),
-//                $("<td>").text(producto.fc),
-//                $("<td>").text(producto.presentacion),
-//                $("<td>").text(producto.iva),
-//                $("<td>").text(producto.precioIms),
-//                $("<td>").text(producto.cantidad),
-//                $("<td>").text(producto.totalUims)
-//            );
-//        });
-//        $("#txtSubTotalIMS").val(data.subtotalIms)
-//        $("#txtIVAIMS").val(data.ivaTotalIMS)
-//        $("#txtTotalIMS").val(data.totalIms)
-
-//        $("#tbimsProducto tbody").append(detalleProductosHTML);
-//    } else {
-//        console.error("Invalid data format or missing detalleProductoProformas.");
-//    }
-//}
 
 function populateTableCGER(responseData) {
     $("#tbgerProducto tbody").html("");
@@ -1969,56 +1895,3 @@ function populateTableCGER(responseData) {
         console.log("No GERMEDIC index found in responseData.");
     }
 }
-//function populateTableCGER(responseData, indexToPopulate) {
-//    $("#tbgerProducto tbody").html("");
-
-//    const data = responseData[indexToPopulate];
-
-//    if (data && data.detalleProductoProformas && Array.isArray(data.detalleProductoProformas)) {
-//        const detalleProductos = data.detalleProductoProformas;
-
-//        const detalleProductosHTML = detalleProductos.map(producto => {
-//            ProductosParaProformaC.push({
-//                idProducto: producto.idProducto,
-//                cpc: producto.cpc,
-//                medicamento: producto.medicamento,
-//                ff: producto.ff,
-//                dc: producto.dc,
-//                fc: producto.fc,
-//                concentracion: producto.concentracion,
-//                presentacion: producto.presentacion,
-//                iva: producto.iva,
-//                cantidad: producto.cantidad,
-//                precioGmc: "0",
-//                precioIms: "0",
-//                precioGer: producto.precioGer,
-//                totalUgmc: "0",
-//                totalUims: "0",
-//                totalUger: producto.totalUger
-//            });
-
-//            return $("<tr>").append(
-//                $("<td>").append(
-//                    $("<button>").addClass("btn btn-danger btn-eliminar btn-sm").append(
-//                        $("<i>").addClass("fas fa-trash-alt")
-//                    ).data("idProducto", producto.idProducto)
-//                ),
-//                $("<td>").text(producto.cpc),
-//                $("<td>").text(producto.dc),
-//                $("<td>").text(producto.cantidad),
-//                $("<td>").text(producto.precioGer),
-//                $("<td>").text(producto.iva),
-//                $("<td>").text(producto.totalUger)
-//            );
-//        });
-
-//        $("#txtSubTotalGER").val(data.subtotalGer)
-//        $("#txtIVAGER").val(data.ivaTotalGER)
-//        $("#txtTotalGER").val(data.totalGer)
-
-//        $("#tbgerProducto tbody").append(detalleProductosHTML);
-//    } else {
-//        console.error("Invalid data format or missing detalleProductoProformas.");
-//    }
-//}
-//recordatorio importante: despues de resolver el problema de editar, resolver el problema de que al buscar proformas por x indicador funciona pero si cambio a otro indicador deja de funcionar. Indicador = fecha o numero de proforma o empresa.

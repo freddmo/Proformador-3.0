@@ -12,7 +12,7 @@ let tablaData;
 
 $(document).ready(function () { 
 
-    fetch("/Usuarios/ListaRoles")
+    fetch("/Usuarios/ListaRoles") //Fetch que muestra la lista de usuarios registrados
         .then(response => {
             return response.ok ? response.json() : Promise.reject(response);
         })
@@ -79,7 +79,7 @@ $(document).ready(function () {
     });
 })
 
-function mostrarModal(modelo = MODELO_BASE) {
+function mostrarModal(modelo = MODELO_BASE) { //Funcion para rellenar la ventana con informacion del producto seleccionado
     $("#txtId").val(modelo.idUsuario)
     $("#txtNombre").val(modelo.nombre)
     $("#txtCorreo").val(modelo.correo)
@@ -92,11 +92,11 @@ function mostrarModal(modelo = MODELO_BASE) {
     $("#modalData").modal("show")
 }
 
-$("#btnNuevo").click(function () {
+$("#btnNuevo").click(function () { //Boton para mostrar la ventana donde ingresar la informacion
     mostrarModal()
 })
 
-$("#btnGuardar").click(function () {
+$("#btnGuardar").click(function () { //Boton para guardar la informacion del usuario
     
 
     const inputs = $("input.input-validar").serializeArray();
@@ -174,7 +174,7 @@ $("#btnGuardar").click(function () {
 })
 
 let filaSeleccionada;
-$("#tbdata tbody").on("click", ".btn-editar", function () {
+$("#tbdata tbody").on("click", ".btn-editar", function () { //Seccion para editar la fila de registro del producto
     if ($(this).closest("tr").hasClass("child")) {
         filaSeleccionada = $(this).closest("tr").prev();
     } else {
@@ -187,7 +187,7 @@ $("#tbdata tbody").on("click", ".btn-editar", function () {
 })
 
 
-$("#tbdata tbody").on("click", ".btn-eliminar", function () {
+$("#tbdata tbody").on("click", ".btn-eliminar", function () { //Seccion para eliminar la fila del registro de producto
 
     let fila;
 

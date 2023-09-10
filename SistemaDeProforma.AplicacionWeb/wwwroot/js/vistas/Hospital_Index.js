@@ -61,7 +61,7 @@ $(document).ready(function () {
     });
 })
 
-function mostrarModal(modelo = MODELO_BASE) {
+function mostrarModal(modelo = MODELO_BASE) { //Funcion del modal
     $("#txtId").val(modelo.idHospital)
     $("#txtRuc").val(modelo.ruc)
     $("#txtHospital").val(modelo.hospital1)
@@ -73,11 +73,11 @@ function mostrarModal(modelo = MODELO_BASE) {
     $("#modalData").modal("show")
 }
 
-$("#btnNuevo").click(function () {
+$("#btnNuevo").click(function () { //Seccion para mostrar la ventana donde se registrara el nuevo Hospital
     mostrarModal()
 })
 
-$("#btnGuardar").click(function () {
+$("#btnGuardar").click(function () { //Seccion para registrar un nuevo Hospital
 
 
     const inputs = $("input.input-validar").serializeArray();
@@ -150,7 +150,7 @@ $("#btnGuardar").click(function () {
 })
 
 let filaSeleccionada;
-$("#tbdata tbody").on("click", ".btn-editar", function () {
+$("#tbdata tbody").on("click", ".btn-editar", function () { //Seccion para editar la fila de regitros de Hospitales
     if ($(this).closest("tr").hasClass("child")) {
         filaSeleccionada = $(this).closest("tr").prev();
     } else {
@@ -162,7 +162,7 @@ $("#tbdata tbody").on("click", ".btn-editar", function () {
     mostrarModal(data)
 })
 
-$("#tbdata tbody").on("click", ".btn-eliminar", function () {
+$("#tbdata tbody").on("click", ".btn-eliminar", function () { //Seccion para editar la fila de regitros de Hospitales
 
     let fila;
 

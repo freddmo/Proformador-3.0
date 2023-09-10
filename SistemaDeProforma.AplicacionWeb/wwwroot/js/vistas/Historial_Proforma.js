@@ -1,4 +1,5 @@
-﻿const VISTA_BUSQUEDA = {
+﻿//Parametros de busqueda de la Proforma
+const VISTA_BUSQUEDA = {
 
     busquedaFecha: () => {
         $("#txtFechaInicio").val("")
@@ -55,13 +56,13 @@
 
 $(document).ready(function () {
     VISTA_BUSQUEDA["busquedaNumero"]()
-
     $.datepicker.setDefaults($.datepicker.regional["es"])
-
     $("#txtFechaInicio").datepicker({ dateFormat: "dd/mm/yy" })
     $("#txtFechaFin").datepicker({ dateFormat: "dd/mm/yy" })
     
 })
+
+//Selector de Parametros para el boton Buscar
 
 $("#cboBuscarPor").change(function () {
 
@@ -75,6 +76,8 @@ $("#cboBuscarPor").change(function () {
         VISTA_BUSQUEDA["busquedaNumero"]()
     }
 })
+
+//Funcion del boton Buscar al hacerse click 
 
 let currentPage = 1;
 const rowsPerPage = 10;
@@ -135,6 +138,7 @@ $("#btnBuscar").click(function () {
         });
 });
 
+//Funciones para cambiar paginas (10 registros por páginas)
 function showPage(pageNumber) {
     const startIndex = (pageNumber - 1) * rowsPerPage;
     const endIndex = Math.min(startIndex + rowsPerPage, totalRows);
@@ -194,7 +198,7 @@ function updatePaginationButtons() {
     }
 }
 
-//seguir cambiando los modales
+//Seccion para el boton "Info" muestre las ventanas de informacion y el boton para imprimir las proformas.
 $("#tbproforma tbody").on("click", ".btn-info", function () {
 
     let d = $(this).data("proforma")

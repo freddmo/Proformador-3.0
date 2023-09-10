@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $(".card-body").LoadingOverlay("show");
 
-    fetch("/Empresas/Obtener")
+    fetch("/Empresas/Obtener") //Fecth para tener informacion de la empresa GMC
         .then(response => {
             $(".card-body").LoadingOverlay("hide");
             return response.ok ? response.json() : Promise.reject(response);
@@ -27,7 +27,7 @@ $(document).ready(function () {
             }
         })
 
-    fetch("/Empresas/Conseguir")
+    fetch("/Empresas/Conseguir")  //Fecth para tener informacion de la empresa IMSUMED
         .then(response => {
             return response.ok ? response.json() : Promise.reject(response);
         })
@@ -50,7 +50,7 @@ $(document).ready(function () {
             }
         })
 
-    fetch("/Empresas/Adquirir")
+    fetch("/Empresas/Adquirir")  //Fecth para tener informacion de la empresa GERMEDIC
         .then(response => {
 
             return response.ok ? response.json() : Promise.reject(response);
@@ -127,7 +127,7 @@ $("#btnGuardarCambios").click(function () {
         })
 })
 
-$("#save2").click(function () {
+$("#btnGuardarCambiosIMS").click(function () {
     const inputs = $("input.input-validar").serializeArray();
     const inputs_sin_valor = inputs.filter((item) => item.value.trim() == "")
 
@@ -139,15 +139,15 @@ $("#save2").click(function () {
     }
 
     const pauta = {
-        numeroDocumento: $("#txtCanton2").val(),
-        nombre: $("#txtRazonSocial2").val(),
-        correo: $("#txtCorreo2").val(),
-        direccion: $("#txtDireccion2").val(),
-        telefono: $("#txTelefono2").val(),
-        ruc: $("#txtRuc2").val()
+        numeroDocumento: $("#txtCantonIMS").val(),
+        nombre: $("#txtRazonSocialIMS").val(),
+        correo: $("#txtCorreoIMS").val(),
+        direccion: $("#txtDireccionIMS").val(),
+        telefono: $("#txTelefonoIMS").val(),
+        ruc: $("#txtRucIMS").val()
     }
 
-    const inputLogo2 = document.getElementById("txtLogo2")
+    const inputLogo2 = document.getElementById("txtLogoIMS")
 
     const formData2 = new FormData()
 
@@ -169,7 +169,7 @@ $("#save2").click(function () {
             if (responseJson.estado) {
                 const ims = responseJson.objeto
 
-                $("#imgLogo2").attr("src", ims.urlLogo)
+                $("#imgLogoIMS").attr("src", ims.urlLogo)
                 swal("Listo!", "Empresa Modificada", "success")
             } else {
                 swal("Lo sentimos", responseJson.mensaje, "error")
@@ -177,7 +177,7 @@ $("#save2").click(function () {
         })
 })
 
-$("#Guardar3").click(function () {
+$("#btnGuardarCambiosGER").click(function () {
     const inputs = $("input.input-validar").serializeArray();
     const inputs_sin_valor = inputs.filter((item) => item.value.trim() == "")
 
@@ -189,15 +189,15 @@ $("#Guardar3").click(function () {
     }
 
     const patron = {
-        numeroDocumento: $("#txtCanton3").val(),
-        nombre: $("#txtRazonSocial3").val(),
-        correo: $("#txtCorreo3").val(),
-        direccion: $("#txtDireccion3").val(),
-        telefono: $("#txTelefono3").val(),
-        ruc: $("#txtRuc3").val()
+        numeroDocumento: $("#txtCantonGER").val(),
+        nombre: $("#txtRazonSocialGER").val(),
+        correo: $("#txtCorreoGER").val(),
+        direccion: $("#txtDireccionGER").val(),
+        telefono: $("#txTelefonoGER").val(),
+        ruc: $("#txtRucGER").val()
     }
 
-    const inputLogo3 = document.getElementById("txtLogo3")
+    const inputLogo3 = document.getElementById("txtLogoGER")
 
     const formData3 = new FormData()
 
@@ -219,7 +219,7 @@ $("#Guardar3").click(function () {
             if (responseJson.estado) {
                 const ger = responseJson.objeto
 
-                $("#imgLogo3").attr("src", ger.urlLogo)
+                $("#imgLogoGER").attr("src", ger.urlLogo)
                 swal("Listo!", "Empresa Modificada", "success")
             } else {
                 swal("Lo sentimos", responseJson.mensaje, "error")

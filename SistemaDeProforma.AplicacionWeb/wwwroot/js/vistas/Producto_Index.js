@@ -16,8 +16,6 @@ let tablaData;
 
 $(document).ready(function () {
 
-
-
     tablaData = $('#tbdata').DataTable({
         responsive: true,
         "ajax": {
@@ -71,7 +69,7 @@ $(document).ready(function () {
     });
 })
 
-function mostrarModal(modelo = MODELO_BASE) {
+function mostrarModal(modelo = MODELO_BASE) { //Funcion para rellenar la ventana para ingresar informacion
     $("#txtId").val(modelo.idProducto)
     $("#txtMedicamento").val(modelo.medicamento)
     $("#txtFF").val(modelo.ff)
@@ -88,11 +86,11 @@ function mostrarModal(modelo = MODELO_BASE) {
     $("#modalData").modal("show")
 }
 
-$("#btnNuevo").click(function () {
+$("#btnNuevo").click(function () { //Boton para mostrar la ventana donde ingresar la informacion
     mostrarModal()
 })
 
-$("#btnGuardar").click(function () {
+$("#btnGuardar").click(function () { //Boton para guardar la informacion del producto
     const inputs = $("input.input-validar").serializeArray();
     const inputs_sin_valor = inputs.filter((item) => item.value.trim() == "")
 
@@ -167,7 +165,7 @@ $("#btnGuardar").click(function () {
 })
 
 let filaSeleccionada;
-$("#tbdata tbody").on("click", ".btn-editar", function () {
+$("#tbdata tbody").on("click", ".btn-editar", function () { //Seccion para editar la fila de registros
     if ($(this).closest("tr").hasClass("child")) {
         filaSeleccionada = $(this).closest("tr").prev();
     } else {
@@ -179,7 +177,7 @@ $("#tbdata tbody").on("click", ".btn-editar", function () {
     mostrarModal(data)
 })
 
-$("#tbdata tbody").on("click", ".btn-eliminar", function () {
+$("#tbdata tbody").on("click", ".btn-eliminar", function () { //Seccion para eliminar la fila de registros
 
     let fila;
 

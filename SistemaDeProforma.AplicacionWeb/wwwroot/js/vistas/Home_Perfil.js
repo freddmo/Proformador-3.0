@@ -28,7 +28,7 @@
     
 })
 
-
+//Boton para guardar los cambios
 $("#btnGuardarCambios").click(function () {
 
     if ($("#txtCorreo").val().trim() == "") {
@@ -87,6 +87,8 @@ $("#btnGuardarCambios").click(function () {
 
     )
 })
+
+//Boton para cambiar la clave del Usuario
 
 $("#btnCambiarClave").click(function(){
     const inputs = $("input.input-validar").serializeArray();
