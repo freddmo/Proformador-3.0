@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewData["Title"] = "Medicamentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos{
+<!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+}
+
+<!-- DataTable Products -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Productos</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <button class="btn btn-success" id="btnNuevo"><i class="fas fa-plus-circle"></i> Nuevo Producto</button>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                           
+                            <th>Medicamento</th>
+                            <th>Forma Farmaceutica</th>
+                            <th>Concentracion</th>
+                            <th>Presentacion</th>
+                            <th>Cpcvalor</th>
+                            <th>Cum</th>
+                            <th>DC</th>
+                            <th>FC</th>
+                            <th>Iva</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Medicamento-->
+<div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Producto</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" value="0" id="txtId">
+                    <input type="hidden"  id="txtDC">
+                    <input type="hidden"  id="txtFC">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtMedicamento">Medicamento</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" autocomplete="off" id="txtMedicamento" name="Codigo Medicamento">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFF">Forma Farmaceutica</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" autocomplete="off" id="txtFF" name="FormaFarmaceutica">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtConcentracion">Concentracion</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" autocomplete="off" id="txtConcentracion" name="Concentracion">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtPresentacion">Presentacion</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" autocomplete="off" id="txtPresentacion" name="Presentacion">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtCpcvalor">Cpc</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" autocomplete="off" id="txtCpcvalor" name="CPC">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtCum">Cum</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" autocomplete="off" id="txtCum" name="CUM">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtIva">Iva</label>
+                                    <input type="number" class="form-control form-control-sm input-validar" autocomplete="off" id="txtIva" name="Iva">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="cboEstado">Estado</label>
+                                    <select class="form-control form-control-sm" id="cboEstado">
+                                        <option value="1">Activo</option>
+                                        <option value="0">No Activo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-sm" type="button" id="btnGuardar">Guardar</button>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+<!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    
+    <script src="~/js/vistas/Producto_Index.js"></script>
+
+}

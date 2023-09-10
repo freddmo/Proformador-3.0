@@ -1,0 +1,325 @@
+﻿@model SistemaDeProforma.AplicacionWeb.Models.ViewModels.VMPDFProforma;
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>GMC_Nro_@Model.proforma.NumeroProforma - Infima Cuantia @Model.proforma.EtiquetaGmc - @Model.proforma.RazonSocial</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make sure the body covers the full viewport height */
+        }
+
+        /* ------TBPRODUCTOS TableHeader------ */
+        table.tbproductos thead {
+            display: table-header-group;
+            background-color: #b4c6e7;
+            padding: 10px;
+            font-size: 15px;
+            border-spacing: 4px;
+            color: black;
+        }
+
+        main {
+            flex-grow: 1; /* Allow the main content to grow and take up remaining space */
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+       
+        table.tbproductos{      
+            border-spacing: 4px;
+            text-align: center;
+        }
+
+        thead {
+            display: table-header-group
+
+        }
+
+        tr {
+            page-break-inside: avoid
+        }
+
+        /* ------ FOOTER------ */
+        .footer-left {
+            float: left;
+            font-size: 8px;
+        }
+
+        .footer-right {
+            float: right;
+        }
+        
+
+        .part-right {
+            float: right;
+        }
+        /* ------HIDE WORD------ */
+        .fondofalso {
+            color: white;
+        }
+        /* ------EXTRA DATA------ */
+        
+        .part-left {
+            float: left;
+        }
+
+        .DetalleAdicional {
+            position: relative;
+            font-size: 14px;
+            width: 40%;
+            margin: 0 auto; /* Center the div horizontally */
+            text-align: center; /* Center the content within the div */
+            display: flex; /* Use flexbox for vertical centering */
+            justify-content: center; /* Center the items horizontally */
+            align-items: center; /* Center the items vertically */
+            flex-direction: column; /* Stack items vertically */
+        }
+
+        .ContenedorDetalle {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-gap: 1px;
+            justify-content: left;
+            align-items: left;
+            margin-top: 20px;
+        }
+
+        .grid-item {
+            padding: 2px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        /* ------CUSTOMIZE TABLE------ */
+        .td-item {
+            border-bottom: 2px solid #E8E8E8 !important;
+        }
+
+        .total-item {
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #808080;
+            color: white;
+        }
+        /* ------OTHER FONTS AND ALIGNMENTS------ */
+        .title-1 {
+          
+            font-weight: bold;
+
+        }
+
+        .centrear {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+    </header>
+    <main>
+        <!-- LOGO GMC -->
+        <table style="width:100%">
+            <tr>
+                <td>
+                    <img src="@Model.negocio.UrlLogo" style="width: 100%; height: 150px;" />
+                </td>
+            </tr>
+        </table>
+        <!-- HOSPITAL - TYPE OF PROFORMA - CODE# -->
+        <div class="info-table">
+            <table style="width:100%">
+                <tr>
+                    <td class="part-left">Fecha: @Model.proforma.FechaRegistro</td>
+                    <td class="part-right">Proforma Nro.@Model.proforma.NumeroProforma</td>
+                </tr>
+                <tr>
+                    <td><p class="title-1 centrear">Código de Necesidad de Infima Cuantía: @Model.proforma.CodigoInfima </p></td>
+                </tr>
+                <tr>
+                    <td>Razon Social: @Model.proforma.RazonSocial</td>
+                </tr>
+                <tr>
+                    <td>Direccion: @Model.proforma.DireccionRS</td>
+                </tr>
+                <tr>
+                    <td>Canton: @Model.proforma.CantonRS</td>
+                </tr>
+                <tr>
+                    <td class="part-left">RUC: @Model.proforma.RucRS</td>
+                    <td class="part-right fondofalso">@Model.proforma.TipoProforma</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- OBSERVATION AND TABLE -->
+        <p class="text">En respuesta a su solicitud, proformamos lo siguiente:</p>
+
+        <table class="tbproductos">
+            <thead>
+                <tr>
+                    @if (Model.proforma.TipoProforma != "General")
+                    {
+                        <th>CPC</th>
+                    }
+                    @if (Model.proforma.TipoProforma != "Infima Cuantia")
+                    {
+                        <th>CUM</th>
+                    }
+                    <th>CANTIDAD</th>
+                    <th>MEDICAMENTO</th>
+                    <th>FORMA FARMACEUTICA</th>
+                    <th>CONCENTRACION</th>
+                    <th>PRESENTACION</th>
+                    <th>PRECIO</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.proforma.DetalleProductoProformas)
+                {
+                    <tr>
+                        @if (Model.proforma.TipoProforma != "General")
+                        {
+                            <td class="td-item">@item.Cpc</td>
+                        }
+                        @if (Model.proforma.TipoProforma != "Infima Cuantia")
+                        {
+                            <td class="td-item">@item.Cum</td>
+                        }
+                        
+                        <td class="td-item">@item.Cantidad</td>
+                        <td class="td-item">@item.Medicamento</td>
+                        <td class="td-item">@item.Ff</td>
+                        <td class="td-item">@item.Concentracion</td>
+                        <td class="td-item">@item.Presentacion</td>
+                        <td class="td-item">@item.PrecioGmc</td>
+                        <td class="td-item">@item.TotalUgmc</td>
+                    </tr>
+                }
+                @if (Model.proforma.TipoProforma == "General")
+                {
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-item">Sub Total</td>
+                        <td class="td-item">@Model.proforma.SubtotalGmc</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-item">IVA</td>
+                        <td class="td-item">@Model.proforma.IvaTotalGMC</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-item">Total</td>
+                        <td class="total-item td-item">@Model.proforma.TotalGmc</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-item">Sub Total</td>
+                        <td class="td-item">@Model.proforma.SubtotalGmc</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-item">IVA</td>
+                        <td class="td-item">@Model.proforma.IvaTotalGMC</td>
+                    </tr>
+                    <tr>
+                        <td colspan="6"></td>
+                        <td class="td-item">Total</td>
+                        <td class="total-item td-item">@Model.proforma.TotalGmc</td>
+                    </tr>
+                }
+            </tbody>
+
+            <table style="width:100%">
+                <tr>
+                    <p class="text">Observación: @Model.proforma.Obervacion</p>
+                </tr>
+            </table>
+        </table>
+
+        <!-- EXTRA INFO -->
+
+        <div class="DetalleAdicional">
+            <div class="ContenedorDetalle">
+                <div class="grid-item">
+                    <p class="text">TIEMPO DE ENTREGA: @Model.proforma.TiempoEntregaGmc</p>
+                </div>
+                <div class="grid-item">
+                    <p class="text">FORMA DE PAGO: @Model.proforma.Fpago</p>
+                </div>
+                <div class="grid-item">
+                    <p class="text">COTIZACIÓN VALIDA POR: @Model.proforma.Cvp</p>
+                </div>
+                <div class="grid-item">
+                    <p class="text">GARANTÍA TÉCNICA: @Model.proforma.Gtecnica</p>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <p class="text" style="margin-bottom: 50px;">ATENTAMENTE.-</p>
+        <p class="text">GIOVANNY MORENO CORDOVA-</p>
+        <p class="text">DISTRIBUIDORA @Model.negocio.Nombre.ToUpper() @Model.proforma.Usuario</p>
+    </main>
+
+    <footer>
+        <!-- Footer -->
+        <div class="footer-left">
+            <p class="text">Telefono: @Model.negocio.Telefono</p>
+            <p class="text">Direccion: @Model.negocio.Direccion</p>
+            <p class="text">Correo: @Model.negocio.Correo</p>
+            <p class="text">@Model.negocio.NumeroDocumento - Ecuador</p>
+        </div>
+        <div class="footer-right">
+            
+        </div>
+    </footer>
+</body>
+</html>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var tipoProforma = "@Model.proforma.TipoProforma";
+
+        if (tipoProforma === "General") {
+            
+            changeNecesidadText();
+        } 
+    });
+
+
+
+    function changeNecesidadText() {
+        var necesidadTd = document.querySelector("td > p.title-1");
+        if (necesidadTd) {
+            necesidadTd.textContent = "COTIZACIÓN DE MEDICAMENTOS";
+            necesidadTd.style.textAlign = "center";
+        }
+    }
+</script>
+
+
+
+
+
+
+
+

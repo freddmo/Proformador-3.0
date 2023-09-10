@@ -1,0 +1,933 @@
+﻿
+@{
+    ViewData["Title"] = "NuevaProforma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos{
+<!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.5/dist/sweetalert2.min.css">
+    <style>
+        .select2{
+            width:100% !important;
+           
+        }
+
+        .bg-light-red {
+            background-color: #ffcccc; 
+        }
+
+        .bg-light-green {
+            background-color: #90EE90; /* Hexadecimal color code for light green */
+        }
+        #cardgmc{
+            background-color: #B7C9E2;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #cardims{
+            background-color: #B7C9E2;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #cardger{
+            background-color: #B7C9E2;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #tbProducto {
+            table-layout: fixed;
+        }
+
+            #tbProducto th {
+                white-space: normal; /* Allow text wrapping within cells */
+                word-wrap: break-word; /* Break words if they exceed cell width */
+            }
+
+        #tbProducto tbody {
+            overflow-x: auto;
+        }
+
+        #tbimsProducto {
+            table-layout: fixed;
+        }
+
+            #tbimsProducto th {
+                white-space: normal; /* Allow text wrapping within cells */
+                word-wrap: break-word; /* Break words if they exceed cell width */
+            }
+
+            #tbimsProducto tbody {
+                overflow-x: auto;
+            }
+
+        #tbgerProducto {
+            table-layout: fixed;
+        }
+
+            #tbgerProducto th {
+                white-space: normal; /* Allow text wrapping within cells */
+                word-wrap: break-word; /* Break words if they exceed cell width */
+            }
+
+            #tbgerProducto tbody {
+                overflow-x: auto;
+            }
+    </style>
+}
+
+<div class="row">
+    @*#SECCION DE ELEGIR EL HOSPITAL Y LA INFIMA CUANTIA junto con los productos*@
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-second-primary">
+                        <h6 class="m-0 font-weight-bold text-white">INGRESE EL HOSPITAL</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <!-- HOSPITAL INFO -->
+                            <div class="form-group col-sm-12">
+                                <select class="form-control form-control-sm" id="cboBuscarHospital">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="cboCodigoInfima"></span>
+                                </div>
+                                <input type="text" class="form-control form-control-sm" id="txtCodigoInfima" autocomplete="off" placeholder="Codigo Infima Cuantia">
+                            </div>
+
+                            <div class="form-group col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="txtRuc" placeholder="Ruc" disabled>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <input type="text" class="form-control form-control-sm" id="txtCanton" placeholder="Canton" disabled>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <input type="text" class="form-control form-control-sm" id="txtRazonSocial" placeholder="Razon Social" disabled>
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <input type="text" class="form-control form-control-sm" id="txtDireccion" placeholder="Direccion" disabled>
+                            </div>
+                            <!-- EXTRA INFORMATION -->
+                            <div class="form-group col-sm-4">
+                                <h6 class="m-0 font-weight-bold text-black"> GMC</h6>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <h6 class="m-0 font-weight-bold text-black"> IMSUMED</h6>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <h6 class="m-0 font-weight-bold text-black"> GERMEDIC</h6>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtCvpGMC"  autocomplete="off" placeholder="Validez de GMC" value="90 Días">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtCvpIMS" autocomplete="off" placeholder="Validez de IMSUMED" value=" 90 DÍAS">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtCvpGER" autocomplete="off" placeholder="Validez de GERMEDIC" value=" 90 DÍAS">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtFpagoGMC" autocomplete="off" placeholder="Forma de pago GMC" value=" Contra-Entrega">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtFpagoIMS" autocomplete="off" placeholder="Forma de pago IMS" value=" Contra-Entrega">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtFpagoGER" autocomplete="off" placeholder="Forma de pago GER" value=" CONTRA-ENTREGA">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtCtecnicaGMC" autocomplete="off" placeholder="Garantia GMC" value="1 Año">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtCtecnicaIMS" autocomplete="off" placeholder="Garantia IMS" value="12 MESES">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtCtecnicaGER" autocomplete="off" placeholder="Garantia GER" value="1 AÑO">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtTentregaGMC" autocomplete="off" placeholder="Tiempo de entrega GMC" value="5 días a la entrega de la orden de compra">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtTentregaIMS" autocomplete="off" placeholder="Tiempo de entrega IMS" value="10 días calendario">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <input type="text" class="form-control form-control-sm" id="txtTentregaGER" autocomplete="off" placeholder="Tiempo de entrega GER" value="5 días a la entrega de la orden de compra">
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <textarea class="form-control" id="txtObservacionGMC" rows="3" placeholder="Cuadro de observacion para GMC"></textarea>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <textarea class="form-control" id="txtObservacionIMS" rows="3" placeholder="Cuadro de observacion para IMSUMED"></textarea>
+                            </div>
+                            <div class="form-group col-sm-4">
+                                <textarea class="form-control" id="txtObservacionGER" rows="3" placeholder="Cuadro de observacion para GERMEDIC"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 3 TABLES -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-second-primary">
+                        <h6 class="m-0 font-weight-bold text-white"> 3 EMPRESAS - INGRESE EL PRODUCTO</h6>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <select class="form-control form-control-sm" id="cboBuscarProducto">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GMC TABLE -->
+        <div class="row" >
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-light-red">
+                        <h6 class="m-0 font-weight-bold text-white">GMC - INGRESE EL PRODUCTO</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <select class="form-control form-control-sm" id="cboBuscarProductoGMC">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm" id="tbProducto">
+                                        <colgroup>
+                                            <col width="40px"> <!-- Adjust the widths as needed for each column -->
+
+                                            <col width="100px">
+                                            <col width="150px">
+                                            <col width="100px">
+                                            <col width="150px">
+                                            <col width="150px">
+                                            <col width="50px">
+                                            <col width="100px">
+                                            <col width="100px">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+
+                                                <th>CANTIDAD</th>
+                                                <th>MEDICAMENTO</th>
+                                                <th>FORMA</th>
+                                                <th>CONCENTRACION</th>
+                                                <th>PRESENTACION</th>
+                                                <th>iva</th>
+                                                <th>Precio</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- IMSUMED TABLE -->
+        <div class="row" >
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-primary">
+                        <h6 class="m-0 font-weight-bold text-white">IMSUMED - INGRESE EL PRODUCTO</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-12">
+                                <select class="form-control form-control-sm" id="cboBuscarProductoIMS">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm" id="tbimsProducto">
+                                        <colgroup>
+                                            <col width="40px"> <!-- Adjust the widths as needed for each column -->
+
+                                            <col width="120px">
+                                            <col width="150px">
+                                            <col width="120px">
+                                            <col width="50px">
+                                            <col width="100px">
+                                            <col width="100px">
+                                            <col width="100px">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+
+                                                <th>MEDICAMENTO</th>
+                                                <th>FORMA Y CONCENTRACION</th>
+                                                <th>PRESENTACION</th>
+                                                <th>IVA</th>
+                                                <th>PRECIO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- GERMEDIC TABLE -->
+        <div class="row" >
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-light-green">
+                        <h6 class="m-0 font-weight-bold text-white">GERMEDIC - INGRESE EL PRODUCTO</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                        <div class="form-group col-sm-12">
+                        <select class="form-control form-control-sm" id="cboBuscarProductoGER">
+                        <option value=""></option>
+                        </select>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-sm" id="tbgerProducto">
+                                        <colgroup>
+                                            <col width="40px"> <!-- Adjust the widths as needed for each column -->
+
+                                            <col width="150px">
+                                            <col width="100px">
+                                            <col width="100px">
+                                            <col width="50px">
+                                            <col width="100px">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+
+                                                <th>DESCRIPCION COMPLETA</th>
+                                                <th>CANTIDAD</th>
+                                                <th>VALOR UNITARIO</th>
+                                                <th>IVA</th>
+                                                <th>TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- LAST DETAILS SECTION -->
+    <div class="col-sm-4">
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 bg-second-primary">
+                        <h6 class="m-0 font-weight-bold text-white">DETALLES EXTRAS</h6>
+                    </div>
+                    <div class="card-body">
+                        <!-- Tipo Proforma Detalle -->
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cboTipoProforma">Tipo</label>
+                            </div>
+                            <select class="custom-select" id="cboTipoProforma" >
+                            </select>
+                        </div>
+                        <!-- Buscar Proforma Detalle -->
+                        <div class="input-group input-group-sm mb-3">
+                            
+                            <div class="input-group-prepend">
+                                <input type="text" class="form-control form-control-sm" id="prueba" autocomplete="off" placeholder="pon numero">
+                            </div>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-primary btn-sm" id="btnprueba">Buscar Nro. Proforma</button>
+                            </div>
+                        </div>
+
+                        <!-- SubTotal GMC Detalle -->
+                        <div class="card" id="cardgmc">
+                            <h6 class="m-0 font-weight-bold text-black"> GMC</h6>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupSubTotalGMC">Sub Total Gmc</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupSubTotalGMC" id="txtSubTotalGMC"  disabled>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupIVA">IVA(12%)</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupIVAGMC" id="txtIVAGMC" disabled>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupTotalGMC">Total GMC</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupTotalGMC" id="txtTotalGMC" disabled>
+                            </div>
+                        </div>
+                        <!-- SubTotal IMSUMED Detalle -->
+                        <div class="card" id="cardims">
+                            <h6 class="m-0 font-weight-bold text-black"> IMSUMED</h6>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupSubTotalIMS">Sub Total Imsumed</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupSubTotalIMS" id="txtSubTotalIMS" disabled>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupIVAIMS">IVA(12%)</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupIVAIMS" id="txtIVAIMS" disabled>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupTotalIMS">Total IMSUMED</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupTotalIMS" id="txtTotalIMS" disabled>
+                            </div>
+                        </div>
+                        <!-- SubTotal GERMEDIC Detalle -->
+                        <div class="card" id="cardger">
+                            <h6 class="m-0 font-weight-bold text-black"> GERMEDIC</h6>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupSubTotalGER">Sub Total GERMEDIC</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupSubTotalGER" id="txtSubTotalGER" disabled>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupIVAGER">IVA(12%)</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupIGV" id="txtIVAGER" disabled>
+                            </div>
+                            <div class="input-group input-group-sm mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupTotalGER">TotalGER</span>
+                                    <span class="input-group-text">$</span>
+                                </div>
+                                <input type="text" class="form-control text-right" aria-label="Small" aria-describedby="inputGroupTotalGER" id="txtTotalGER" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <!-- Botones -->
+                        <div class="form-group mb-0">
+                            <button class="btn btn-purple btn-sm btn-block" id="btnTerminarProforma">TERMINAR 3 PROFORMAS</button>
+                            <button class="btn btn-danger btn-sm btn-block" id="btnTerminarProformaGMC">Terminar Proforma GMC</button>
+                            <button class="btn btn-primary btn-sm btn-block" id="btnTerminarProformaIMS">Terminar Proforma IMSUMED</button>
+                            <button class="btn btn-success btn-sm btn-block" id="btnTerminarProformaGER">Terminar Proforma GERMEDIC</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Modal eliminar?-->
+<div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Producto</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    
+                    <input  id="txtDC">
+                    <input  id="txtFC">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtCPC">CPC</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtCPC" name="CPC">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtCANTIDAD">CANTIDAD</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtCANTIDAD" name="CANTIDAD">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtPRECIOGMC">PRECIOGMC</label>
+                                    <input type="text" class="form-control form-control-sm input-validar" id="txtPRECIOGMC" name="PRECIOGMC">
+                                </div>     
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary btn-sm" type="button" id="btnadd">Añadir</button>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal GMC-->
+<div class="modal fade" id="modalDataGMC" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Proforma</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtFechaRegistro">Fecha Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFechaRegistro" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtNumeroProforma">Numero Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtNumeroProforma" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtUsuarioRegistroGMC">Usuario Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistroGMC" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTipoProformaGMC">Tipo Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTipoProformaGMC" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCodigoInfimaGMC">Codigo Infima</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCodigoInfimaGMC" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRazonSocialGMC">Razon Social</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRazonSocialGMC" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRucGMC">Ruc</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRucGMC" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCantonGMC">Canton</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCantonGMC" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDireccionGMC">Direccion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtDireccionGMC" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtGT">Garantia Tecnica</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtGT">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtValidez">Validez por:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtValidez">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtTentrega">Tiempo de Entrega</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTentrega">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFpago">Forma de Pago</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFpago">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtObservacion">Observacion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtObservacion">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtSubTotal">Sub Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtSubTotal" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtIva">IVA</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtIva" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTotal">Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTotal" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tbProductos" class="table table-sm table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>CPC</th>
+                                                <th>CANTIDAD</th>
+                                                <th>MEDICAMENTO</th>
+                                                <th>FORMA</th>
+                                                <th>CONCENTRACION</th>
+                                                <th>PRESENTACION</th>
+                                                <th>Precio</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimirGMC">Imprimir</a>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal IMSUMED-->
+<div class="modal fade" id="modalDataIMS" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Proforma IMSUMED</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtFechaRegistroIMS">Fecha Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFechaRegistroIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtNumeroProformaIMS">Numero Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtNumeroProformaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtUsuarioRegistroIMS">Usuario Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistroIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTipoProformaIMS">Tipo Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTipoProformaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCodigoInfimaIMS">Codigo Infima</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCodigoInfimaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRazonSocialIMS">Razon Social</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRazonSocialIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRucIMS">Ruc</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRucIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCantonIMS">Canton</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCantonIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDireccionIMS">Direccion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtDireccionIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtGTIMS">Garantia Tecnica</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtGTIMS">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtValidezIMS">Validez por:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtValidezIMS">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtTentregaIMS">Tiempo de Entrega</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTentregaIMS">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFpagoIMS">Forma de Pago</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFpagoIMS">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtObservacionIMS">Observacion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtObservacionIMS">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtSubTotalIMS">Sub Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtSubTotalIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtIvaIMS">IVA</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtIvaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTotalIMS">Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTotalIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tbimsProductos" class="table table-sm table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>CPC</th>
+                                                <th>MEDICAMENTO</th>
+                                                <th>FORMA FARMACEUTICA Y CONCENTRACION</th>
+                                                <th>PRESENTACION</th>
+                                                <th>PRECIO UNITARIO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimirIMS">Imprimir</a>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal GERMEDIC-->
+<div class="modal fade" id="modalDataGERMEDIC" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Proforma GERMEDIC</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtFechaRegistroGER">Fecha Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFechaRegistroGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtNumeroProformaGER">Numero Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtNumeroProformaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtUsuarioRegistroGER">Usuario Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistroGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTipoProformaGER">Tipo Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTipoProformaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCodigoInfimaGER">Codigo Infima</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCodigoInfimaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRazonSocialGER">Razon Social</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRazonSocialGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRucGER">Ruc</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRucGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCantonGER">Canton</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCantonGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDireccionGER">Direccion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtDireccionGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtGTGER">Garantia Tecnica</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtGTGER">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtValidezGER">Validez por:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtValidezGER">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtTentregaGER">Tiempo de Entrega</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTentregaGER">
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFpagoGER">Forma de Pago</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFpagoGER">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtObservacionGER">Observacion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtObservacionGER">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtSubTotalGER">Sub Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtSubTotalGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtIvaGER">IVA</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtIvaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTotalGER">Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTotalGER" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="tbgerProductos" class="table table-sm table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>CPC</th>
+                                                <th>DESCRIPCION COMPLETA DEL MEDICAMENTO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>VALOR UNITARIO</th>
+                                                <th>VALOR TOTAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimirGER">Imprimir</a>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/select2/select2.min.js"></script>
+    <script src="~/vendor/select2/es.min.js"></script>
+    <script src="~/js/vistas/Nueva_Proforma.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.5/dist/sweetalert2.min.js"></script>
+
+}
+

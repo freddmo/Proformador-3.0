@@ -1,0 +1,495 @@
+﻿
+@{
+    ViewData["Title"] = "HistorialProforma";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section Estilos{
+<!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link href="~/vendor/jquery-ui/jquery-ui.css" rel="stylesheet">
+}
+<!-- Filter and Table -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Historial de Proforma</h6>
+    </div>
+    <div class="card-body">
+        <!-- Filter -->
+        <div class="form-row align-items-end">
+            <div class="form-group col-sm-3">
+                <label for="cboBuscarPor">Buscar por</label>
+                <select class="form-control form-control-sm" id="cboBuscarPor">
+                    <option value="numero">Numero de Proforoma</option>
+                    <option value="fecha">Fechas</option>
+                    <option value="nic">Numero de Infima</option>
+                    <option value="empresa">Empresa</option>
+
+                </select>
+            </div>
+            <div class="form-group col-sm-3 busqueda-fecha">
+                <label for="txtFechaInicio">Fecha Inicio</label>
+                <input type="text" class="form-control form-control-sm" id="txtFechaInicio">
+            </div>
+            <div class="form-group col-sm-3 busqueda-fecha">
+                <label for="txtFechaFin">Fecha Fin</label>
+                <input type="text" class="form-control form-control-sm" id="txtFechaFin">
+            </div>
+            <div class="form-group col-sm-3 busqueda-numero">
+                <label for="txtNumero">Numero de Proforma</label>
+                <input type="text" class="form-control form-control-sm" id="txtNumero">
+            </div>
+            <div class="form-group col-sm-3 busqueda-nic">
+                <label for="txtNic">Numero de Infima</label>
+                <input type="text" class="form-control form-control-sm" id="txtNic">
+            </div>
+            <select class="form-group col-sm-3 busqueda-empresa" id="selempresa">
+                <option selected>GMC</option>
+                <option>IMSUMED</option>
+                <option>GERMEDIC</option>
+            </select>
+            
+
+            <div class="form-group col-sm-3">
+                <button class="btn btn-success btn-block btn-sm" type="button" id="btnBuscar"><i class="fas fa-search"></i> Buscar</button>
+            </div>
+        </div>
+
+        <hr />
+        <!-- Table -->
+        <div class="row busqueda-tbproforma">
+            <div class="col-sm-12">
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped" id="tbproforma">
+                        <thead>
+                            <tr>
+                                <th>Fecha Registro</th>
+                                <th>Numero Proforma</th>
+                                <th>Codigo Infima</th>
+                                <th>Tipo Proforma</th>
+                                <th>Hospital</th>
+                                <th>Empresa</th>
+                                <th>Iva</th>
+                                <th>TotalGmc</th>
+                                <th>TotalIms</th>
+                                <th>TotalGer</th>
+                                <th>Edicion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+
+                
+            </div>
+        </div>
+
+        <div id="pagination" class="text-center mt-3"></div>
+    </div>
+</div>
+
+<!--Modal GMC-->
+<div class="modal fade" id="modalData" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Proforma</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtFechaRegistro">Fecha Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFechaRegistro" disabled>
+                                    
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtNumeroProforma">Numero Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtNumeroProforma" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtUsuarioRegistro">Usuario Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistro" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTipoProforma">Tipo Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTipoProforma" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCodigoInfima">Codigo Infima</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCodigoInfima" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRazonSocial">Razon Social</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRazonSocial" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRuc">Ruc</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRuc" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCanton">Canton</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCanton" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDireccion">Direccion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtDireccion" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtGT">Garantia Tecnica</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtGT" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtValidez">Validez por:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtValidez" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtTentrega">Tiempo de Entrega</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTentrega" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFpago">Forma de Pago</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFpago" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtObservacion">Observacion</label>
+                                    <textarea class="form-control" id="txtObservacion" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtSubTotal">Sub Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtSubTotal" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtIva">IVA</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtIva" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTotal">Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTotal" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="tbProductos" class="table table-sm table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th id="columnHeader">CODIGO</th>
+                                                    <th>CANTIDAD</th>
+                                                    <th>MEDICAMENTO</th>
+                                                    <th>FORMA</th>
+                                                    <th>CONCENTRACION</th>
+                                                    <th>PRESENTACION</th>
+                                                    <th>Precio</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            
+                <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimirGMC">Imprimir</a>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal IMSUMED-->
+<div class="modal fade" id="modalDataIMS" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Proforma IMSUMED</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtFechaRegistroIMS">Fecha Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFechaRegistroIMS" disabled>
+                                   
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtNumeroProformaIMS">Numero Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtNumeroProformaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtUsuarioRegistroIMS">Usuario Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistroIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTipoProformaIMS">Tipo Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTipoProformaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCodigoInfimaIMS">Codigo Infima</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCodigoInfimaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRazonSocialIMS">Razon Social</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRazonSocialIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRucIMS">Ruc</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRucIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCantonIMS">Canton</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCantonIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDireccionIMS">Direccion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtDireccionIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtGTIMS">Garantia Tecnica</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtGTIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtValidezIMS">Validez por:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtValidezIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtTentregaIMS">Tiempo de Entrega</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTentregaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFpagoIMS">Forma de Pago</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFpagoIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtObservacionIMS">Observacion</label>
+                                    <textarea class="form-control" id="txtObservacionIMS" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtSubTotalIMS">Sub Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtSubTotalIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtIvaIMS">IVA</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtIvaIMS" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTotalIMS">Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTotalIMS" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="tbimsProductos" class="table table-sm table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th id="columnHeader2">CODIGO</th>
+                                                    <th>MEDICAMENTO</th>
+                                                    <th>FORMA FARMACEUTICA Y CONCENTRACION</th>
+                                                    <th>PRESENTACION</th>
+                                                    <th>PRECIO UNITARIO</th>
+                                                    <th>CANTIDAD</th>
+                                                    <th>TOTAL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+           
+                <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimirIMS">Imprimir</a>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal GERMEDIC-->
+<div class="modal fade" id="modalDataGERMEDIC" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Detalle Proforma GERMEDIC</h6>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtFechaRegistroGER">Fecha Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFechaRegistroGER" disabled>
+                                  
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtNumeroProformaGER">Numero Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtNumeroProformaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtUsuarioRegistroGER">Usuario Registro</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtUsuarioRegistroGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTipoProformaGER">Tipo Proforma</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTipoProformaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCodigoInfimaGER">Codigo Infima</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCodigoInfimaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRazonSocialGER">Razon Social</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRazonSocialGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtRucGER">Ruc</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtRucGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtCantonGER">Canton</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtCantonGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtDireccionGER">Direccion</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtDireccionGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtGTGER">Garantia Tecnica</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtGTGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtValidezGER">Validez por:</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtValidezGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="txtTentregaGER">Tiempo de Entrega</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTentregaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="txtFpagoGER">Forma de Pago</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtFpagoGER" disabled>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-12">
+                                    <label for="txtObservacionGER">Observacion</label>
+                                    <textarea class="form-control" id="txtObservacionGER" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-4">
+                                    <label for="txtSubTotalGER">Sub Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtSubTotalGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtIvaGER">IVA</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtIvaGER" disabled>
+                                </div>
+                                <div class="form-group col-sm-4">
+                                    <label for="txtTotalGER">Total</label>
+                                    <input type="text" class="form-control form-control-sm" id="txtTotalGER" disabled>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table id="tbgerProductos" class="table table-sm table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th id="columnHeader3">CODIGO</th>
+                                                    <th>DESCRIPCION COMPLETA DEL MEDICAMENTO</th>
+                                                    <th>CANTIDAD</th>
+                                                    <th>VALOR UNITARIO</th>
+                                                    <th>VALOR TOTAL</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+               
+                <a href="#" class="btn btn-primary btn-sm" target="_blank" id="linkImprimirGER">Imprimir</a>
+                <button class="btn btn-danger btn-sm" type="button" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/jquery-ui/jquery-ui.js"></script>
+    <script src="~/vendor/jquery-ui/idioma/datepicker-es.js"></script>
+    <script src="~/js/vistas/Historial_Proforma.js"></script>
+   
+}
+
