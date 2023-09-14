@@ -1,9 +1,9 @@
 ﻿const MODELO_BASE = {
     idHospital:0,
-    ruc: "",
     hospital1: "",
     direccion: "",
     canton: "",
+    ruc: "",
     activo: 1
 }
 
@@ -22,10 +22,10 @@ $(document).ready(function () {
         },
         "columns": [
             { "data": "idHospital", "visible": false, "searchable": false },
-            { "data": "ruc" },
             { "data": "hospital1" },
             { "data": "direccion" },
             { "data": "canton" },
+            { "data": "ruc" },
             {
                 "data": "activo", render: function (data) {
                     if (data == 1)
@@ -59,14 +59,28 @@ $(document).ready(function () {
             url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
         },
     });
+
+    limitInputLength('txtHospital', 200);
+    limitInputLength('txtDireccion', 400);
+    limitInputLength('txtCanton', 30);
+    limitInputLength('txtRuc', 40);
 })
+
+function limitInputLength(inputId, maxLength) {
+    $('#' + inputId).on('input', function () {
+        if ($(this).val().length > maxLength) {
+            $(this).val($(this).val().substring(0, maxLength));
+            toastr.warning("Pasaste el límite de caracteres", "");
+        }
+    });
+}
 
 function mostrarModal(modelo = MODELO_BASE) { //Funcion del modal
     $("#txtId").val(modelo.idHospital)
-    $("#txtRuc").val(modelo.ruc)
     $("#txtHospital").val(modelo.hospital1)
     $("#txtDireccion").val(modelo.direccion)
     $("#txtCanton").val(modelo.canton)
+    $("#txtRuc").val(modelo.ruc)
     $("#cboEstado").val(modelo.activo)
 
 
@@ -92,10 +106,10 @@ $("#btnGuardar").click(function () { //Seccion para registrar un nuevo Hospital
 
     const modelo = structuredClone(MODELO_BASE);
     modelo["idHospital"] = parseInt($("#txtId").val())
-    modelo["ruc"] = $("#txtRuc").val()
     modelo["hospital1"] = $("#txtHospital").val()
     modelo["direccion"] = $("#txtDireccion").val()
     modelo["canton"] = $("#txtCanton").val()
+    modelo["ruc"] = $("#txtRuc").val()
     modelo["Activo"] = $("#cboEstado").val()
 
 

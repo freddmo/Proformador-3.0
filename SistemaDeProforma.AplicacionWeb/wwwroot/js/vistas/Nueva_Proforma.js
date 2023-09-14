@@ -33,9 +33,34 @@ $(document).ready(function () {
         }
 
     });
-    
+
+    limitInputLength('txtCvpGMC', 70);
+    limitInputLength('txtCvpIMS', 70);
+    limitInputLength('txtCvpGER', 70);
+    limitInputLength('txtFpagoGMC', 70);
+    limitInputLength('txtFpagoIMS', 70);
+    limitInputLength('txtFpagoGER', 70);
+    limitInputLength('txtCtecnicaGMC', 70);
+    limitInputLength('txtCtecnicaIMS', 70);
+    limitInputLength('txtCtecnicaGER', 70);
+    limitInputLength('txtTentregaGMC', 70);
+    limitInputLength('txtTentregaIMS', 70);
+    limitInputLength('txtTentregaGER', 70);
+    limitInputLength('txtObservacionGMC', 500);
+    limitInputLength('txtObservacionIMS', 500);
+    limitInputLength('txtObservacionGER', 500);
+    limitInputLength('prueba', 6);
+    limitInputLength('txtCodigoInfima', 5);
 })
 
+function limitInputLength(inputId, maxLength) {
+    $('#' + inputId).on('input', function () {
+        if ($(this).val().length > maxLength) {
+            $(this).val($(this).val().substring(0, maxLength));
+            toastr.warning("Pasaste el límite de caracteres", "");
+        }
+    });
+}
 
 $(document).on("select2:open", function () {
     document.querySelector(".select2-search__field").focus();
@@ -1066,7 +1091,22 @@ $("#btnTerminarProforma").click(function () {
                 $("#txtCodigoInfima").val("")
                 $("#cboCodigoInfima").text("")
                 $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                $("#txtObservacion").val("")
+                $("#txtCvpGMC").val("90 Días")
+                $("#txtCvpIMS").val("90 Días")
+                $("#txtCvpGER").val("90 Días")
+                $("#txtFpagoGMC").val("Contra-Entrega")
+                $("#txtFpagoIMS").val("Contra-Entrega")
+                $("#txtFpagoGER").val("CONTRA-ENTREGA")
+                $("#txtCtecnicaGMC").val("1 Año")
+                $("#txtCtecnicaIMS").val("12 MESES")
+                $("#txtCtecnicaGER").val("1 AÑO")
+                $("#txtTentregaGMC").val("5 días a la entrega de la orden de compra")
+                $("#txtTentregaIMS").val("10 días calendario")
+                $("#txtTentregaGER").val("5 días a la entrega de la orden de compra")
+                $("#txtObservacionGMC").val("")
+                $("#txtObservacionIMS").val("")
+                $("#txtObservacionGER").val("")
+                
                 swal.fire("Registrado!", `Numero de Proforma de las 3 EMPRESAS: ${responseJson.objeto.numeroProforma}`, "success")
 
             } else {
@@ -1264,7 +1304,21 @@ $("#btnTerminarProformaGMC").click(function () {
                 $("#txtCodigoInfima").val("")
                 $("#cboCodigoInfima").text("")
                 $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                $("#txtObservacion").val("")
+                $("#txtCvpGMC").val("90 Días")
+                $("#txtCvpIMS").val("90 Días")
+                $("#txtCvpGER").val("90 Días")
+                $("#txtFpagoGMC").val("Contra-Entrega")
+                $("#txtFpagoIMS").val("Contra-Entrega")
+                $("#txtFpagoGER").val("CONTRA-ENTREGA")
+                $("#txtCtecnicaGMC").val("1 Año")
+                $("#txtCtecnicaIMS").val("12 MESES")
+                $("#txtCtecnicaGER").val("1 AÑO")
+                $("#txtTentregaGMC").val("5 días a la entrega de la orden de compra")
+                $("#txtTentregaIMS").val("10 días calendario")
+                $("#txtTentregaGER").val("5 días a la entrega de la orden de compra")
+                $("#txtObservacionGMC").val("")
+                $("#txtObservacionIMS").val("")
+                $("#txtObservacionGER").val("")
                 swal.fire("Registrado!", `Numero de Proforma de GMC: ${responseJson.objeto.numeroProforma }`, "success")
                 
             } else {
@@ -1337,7 +1391,21 @@ $("#btnTerminarProformaIMS").click(function () {
                 $("#txtCodigoInfima").val("")
                 $("#cboCodigoInfima").text("")
                 $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                $("#txtObservacion").val("")
+                $("#txtCvpGMC").val("90 Días")
+                $("#txtCvpIMS").val("90 Días")
+                $("#txtCvpGER").val("90 Días")
+                $("#txtFpagoGMC").val("Contra-Entrega")
+                $("#txtFpagoIMS").val("Contra-Entrega")
+                $("#txtFpagoGER").val("CONTRA-ENTREGA")
+                $("#txtCtecnicaGMC").val("1 Año")
+                $("#txtCtecnicaIMS").val("12 MESES")
+                $("#txtCtecnicaGER").val("1 AÑO")
+                $("#txtTentregaGMC").val("5 días a la entrega de la orden de compra")
+                $("#txtTentregaIMS").val("10 días calendario")
+                $("#txtTentregaGER").val("5 días a la entrega de la orden de compra")
+                $("#txtObservacionGMC").val("")
+                $("#txtObservacionIMS").val("")
+                $("#txtObservacionGER").val("")
                 swal.fire("Registrado!", `Numero de Proforma de IMS: ${responseJson.objeto.numeroProforma}`, "success")
 
                 /**/
@@ -1412,7 +1480,21 @@ $("#btnTerminarProformaGER").click(function () {
                 $("#txtCodigoInfima").val("")
                 $("#cboCodigoInfima").text("")
                 $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                $("#txtObservacion").val("")
+                $("#txtCvpGMC").val("90 Días")
+                $("#txtCvpIMS").val("90 Días")
+                $("#txtCvpGER").val("90 Días")
+                $("#txtFpagoGMC").val("Contra-Entrega")
+                $("#txtFpagoIMS").val("Contra-Entrega")
+                $("#txtFpagoGER").val("CONTRA-ENTREGA")
+                $("#txtCtecnicaGMC").val("1 Año")
+                $("#txtCtecnicaIMS").val("12 MESES")
+                $("#txtCtecnicaGER").val("1 AÑO")
+                $("#txtTentregaGMC").val("5 días a la entrega de la orden de compra")
+                $("#txtTentregaIMS").val("10 días calendario")
+                $("#txtTentregaGER").val("5 días a la entrega de la orden de compra")
+                $("#txtObservacionGMC").val("")
+                $("#txtObservacionIMS").val("")
+                $("#txtObservacionGER").val("")
                 swal.fire("Registrado!", `Numero de Proforma de GER: ${responseJson.objeto.numeroProforma}`, "success")
 
                 /**/
@@ -1429,7 +1511,7 @@ $("#btnTerminarProformaGER").click(function () {
 $("#btnprueba").click(function () {
     let numeroProforma = $("#prueba").val()
 
-    fetch(`/Proformar/Historial?numeroProforma=${numeroProforma}`)
+    fetch(`/Proformar/ObtenerProforma?numeroProforma=${numeroProforma}`)
         .then(response => {
             return response.ok ? response.json() : Promise.reject(response);
         })
@@ -1500,6 +1582,13 @@ $("#btnprueba").click(function () {
                     $("#txtSubTotalGMC").val(responseData[0].subtotalGmc)
                     $("#txtIVAGMC").val(responseData[0].ivaTotalGMC)
                     $("#txtTotalGMC").val(responseData[0].totalGmc)
+                    if (responseData[0].idTipoProforma === 1) {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
+                    } else {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:second").val())
+                    }
+                   
+
                     $("#btnprueba").val("")
                     
                 } else if (responseData[0].detalleTipoEmpresa === "IMSUMED") {
@@ -1517,6 +1606,11 @@ $("#btnprueba").click(function () {
                     $("#txtSubTotalIMS").val(responseData[0].subtotalIms)
                     $("#txtIVAIMS").val(responseData[0].ivaTotalIMS)
                     $("#txtTotalIMS").val(responseData[0].totalIms)
+                    if (responseData[0].idTipoProforma === 1) {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
+                    } else {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:second").val())
+                    }
                     $("#btnprueba").val("")
                     
                 } else if (responseData[0].detalleTipoEmpresa === "GERMEDIC") {
@@ -1534,21 +1628,23 @@ $("#btnprueba").click(function () {
                     $("#txtSubTotalGER").val(responseData[0].subtotalGer)
                     $("#txtIVAGER").val(responseData[0].ivaTotalGER)
                     $("#txtTotalGER").val(responseData[0].totalGer)
+                    if (responseData[0].idTipoProforma === 1) {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
+                    } else {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:second").val())
+                    }
                     $("#btnprueba").val("")
                 } else {
                     swal.fire("lo siento!", "Ingrese un numero de proforma correcto", "error")
                 }
             } else {
 
-                /*swal.fire("sorry!", "sigue codificando", "error")*/
-               
-                
                 populateTableAGMC(responseData);
                 populateTableBIMS(responseData);
                 populateTableCGER(responseData);
                 $("#btnprueba").val("")
             }
-
+            $("#btnprueba").val("")  
             /* -----termina seccion para rellenar la tabla-----*/
         })
         .catch(error => {
@@ -1759,7 +1855,7 @@ function populateTableAGMC(responseData) {
             $("#txtRazonSocial").val(data.razonSocial)
             $("#txtCanton").val(data.cantonRS)
             $("#txtDireccion").val(data.direccionRS)
-
+            $("#txtCodigoInfima").val(data.etiquetaGmc)
             $("#txtSubTotalGMC").val(data.subtotalGmc)
             $("#txtIVAGMC").val(data.ivaTotalGMC)
             $("#txtTotalGMC").val(data.totalGmc)

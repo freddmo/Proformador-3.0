@@ -54,7 +54,7 @@ namespace SistemaDeProforma.BLL.Implementacion
         }
 
         
-        public async Task<List<Proforma>> Historial(string numeroProforma, string nic, string empresa, string fechaInicio, string fechaFin)
+        public async Task<List<Proforma>> Historial(string numeroProforma, string hospi, string nic, string empresa, string fechaInicio, string fechaFin)
         {
             IQueryable<Proforma> query = await _repositorioProforma.Consultar();
             fechaInicio = fechaInicio is null ? "" : fechaInicio;
@@ -87,6 +87,14 @@ namespace SistemaDeProforma.BLL.Implementacion
             else if (!string.IsNullOrEmpty(nic))
             {
                 return query.Where(p => p.CodigoInfima == nic)
+                    .Include(tdp => tdp.IdTipoProformaNavigation)
+                    .Include(u => u.IdUsuarioNavigation)
+                    .Include(dp => dp.DetalleProductoProformas)
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(hospi))
+            {
+                return query.Where(p => p.RazonSocial == hospi)
                     .Include(tdp => tdp.IdTipoProformaNavigation)
                     .Include(u => u.IdUsuarioNavigation)
                     .Include(dp => dp.DetalleProductoProformas)
@@ -141,6 +149,63 @@ namespace SistemaDeProforma.BLL.Implementacion
             //        .ToList();
             //}
 
+
+        }
+
+        public async Task<List<Proforma>> ObtenerProforma(string numeroProforma, string hospi, string nic, string empresa, string fechaInicio, string fechaFin)
+        {
+            IQueryable<Proforma> query = await _repositorioProforma.Consultar();
+            fechaInicio = fechaInicio is null ? "" : fechaInicio;
+            fechaFin = fechaFin is null ? "" : fechaFin;
+
+            //este es un aviso por si quieres cambiar algo. Utiliza este orden y el !string.IsNullOrEmpty()
+
+            if (!string.IsNullOrEmpty(fechaInicio) && !string.IsNullOrEmpty(fechaFin))
+            {
+                DateTime fecha_inicio = DateTime.ParseExact(fechaInicio, "dd/MM/yyyy", new CultureInfo("es-EC"));
+                DateTime fecha_fin = DateTime.ParseExact(fechaFin, "dd/MM/yyyy", new CultureInfo("es-EC"));
+
+                return query.Where(p =>
+                        p.FechaRegistro.Value.Date >= fecha_inicio.Date &&
+                        p.FechaRegistro.Value.Date <= fecha_fin.Date
+                    )
+                    .Include(tdp => tdp.IdTipoProformaNavigation)
+                    .Include(u => u.IdUsuarioNavigation)
+                    .Include(dp => dp.DetalleProductoProformas)
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(numeroProforma))
+            {
+                return query.Where(p => p.NumeroProforma == numeroProforma)
+                    .Include(tdp => tdp.IdTipoProformaNavigation)
+                    .Include(u => u.IdUsuarioNavigation)
+                    .Include(dp => dp.DetalleProductoProformas)
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(nic))
+            {
+                return query.Where(p => p.CodigoInfima == nic)
+                    .Include(tdp => tdp.IdTipoProformaNavigation)
+                    .Include(u => u.IdUsuarioNavigation)
+                    .Include(dp => dp.DetalleProductoProformas)
+                    .ToList();
+            }
+            else if (!string.IsNullOrEmpty(hospi))
+            {
+                return query.Where(p => p.RazonSocial == hospi)
+                    .Include(tdp => tdp.IdTipoProformaNavigation)
+                    .Include(u => u.IdUsuarioNavigation)
+                    .Include(dp => dp.DetalleProductoProformas)
+                    .ToList();
+            }
+            else
+            {
+                return query.Where(p => p.DetalleTipoEmpresa == empresa)
+                    .Include(tdp => tdp.IdTipoProformaNavigation)
+                    .Include(u => u.IdUsuarioNavigation)
+                    .Include(dp => dp.DetalleProductoProformas)
+                    .ToList();
+            }
 
         }
 

@@ -67,7 +67,24 @@ $(document).ready(function () {
             url: "https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
         },
     });
+
+    limitInputLength('txtMedicamento', 200);
+    limitInputLength('txtFF', 100);
+    limitInputLength('txtConcentracion', 150);
+    limitInputLength('txtPresentacion', 100);
+    limitInputLength('txtCpcvalor', 20);
+    limitInputLength('txtCum', 20);
+    limitInputLength('txtIva', 2);
 })
+
+function limitInputLength(inputId, maxLength) {
+    $('#' + inputId).on('input', function () {
+        if ($(this).val().length > maxLength) {
+            $(this).val($(this).val().substring(0, maxLength));
+            toastr.warning("Pasaste el límite de caracteres", "");
+        }
+    });
+}
 
 function mostrarModal(modelo = MODELO_BASE) { //Funcion para rellenar la ventana para ingresar informacion
     $("#txtId").val(modelo.idProducto)

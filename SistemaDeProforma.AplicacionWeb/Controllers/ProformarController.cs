@@ -98,9 +98,16 @@ namespace SistemaDeProforma.AplicacionWeb.Controllers
         
 
         [HttpGet]
-        public async Task<IActionResult> Historial( string numeroProforma, string nic, string empresa, string fechaInicio, string fechaFin)
+        public async Task<IActionResult> Historial( string numeroProforma, string hospi, string nic, string empresa, string fechaInicio, string fechaFin)
         {
-            List<VMProforma> vmHistorialProforma = _mapper.Map<List<VMProforma>>(await _proformaServicio.Historial(numeroProforma,nic, empresa, fechaInicio,fechaFin));
+            List<VMProforma> vmHistorialProforma = _mapper.Map<List<VMProforma>>(await _proformaServicio.Historial(numeroProforma, hospi, nic, empresa, fechaInicio,fechaFin));
+            return StatusCode(StatusCodes.Status200OK, new { data = vmHistorialProforma });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ObtenerProforma(string numeroProforma, string hospi, string nic, string empresa, string fechaInicio, string fechaFin)
+        {
+            List<VMProforma> vmHistorialProforma = _mapper.Map<List<VMProforma>>(await _proformaServicio.ObtenerProforma(numeroProforma, hospi, nic, empresa, fechaInicio, fechaFin));
             return StatusCode(StatusCodes.Status200OK, vmHistorialProforma);
         }
 

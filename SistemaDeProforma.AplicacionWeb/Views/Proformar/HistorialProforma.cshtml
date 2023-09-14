@@ -9,6 +9,9 @@
 <!-- ============================================================
     =ESTILOS PARA ESTA PAGINA
     ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
     <link href="~/vendor/jquery-ui/jquery-ui.css" rel="stylesheet">
 }
 <!-- Filter and Table -->
@@ -26,7 +29,7 @@
                     <option value="fecha">Fechas</option>
                     <option value="nic">Numero de Infima</option>
                     <option value="empresa">Empresa</option>
-
+                    <option value="hospi">Hospital</option>
                 </select>
             </div>
             <div class="form-group col-sm-3 busqueda-fecha">
@@ -45,12 +48,18 @@
                 <label for="txtNic">Numero de Infima</label>
                 <input type="text" class="form-control form-control-sm" id="txtNic">
             </div>
-            <select class="form-group col-sm-3 busqueda-empresa" id="selempresa">
-                <option selected>GMC</option>
-                <option>IMSUMED</option>
-                <option>GERMEDIC</option>
-            </select>
-            
+            <div class="form-group col-sm-3 busqueda-hospi">
+                <label for="txtHospi">Hospital</label>
+                <input type="text" class="form-control form-control-sm" id="txtHospi">
+            </div>
+            <div class="form-group col-sm-3 busqueda-empresa">
+                <label for="selempresa">Empresa</label>
+                <select class="form-control form-control-sm" id="selempresa">
+                    <option selected>GMC</option>
+                    <option>IMSUMED</option>
+                    <option>GERMEDIC</option>
+                </select>
+            </div>
 
             <div class="form-group col-sm-3">
                 <button class="btn btn-success btn-block btn-sm" type="button" id="btnBuscar"><i class="fas fa-search"></i> Buscar</button>
@@ -59,36 +68,30 @@
 
         <hr />
         <!-- Table -->
-        <div class="row busqueda-tbproforma">
+        <div class="row">
             <div class="col-sm-12">
-
-                <div class="table-responsive">
-                    <table class="table table-sm table-striped" id="tbproforma">
-                        <thead>
-                            <tr>
-                                <th>Fecha Registro</th>
-                                <th>Numero Proforma</th>
-                                <th>Codigo Infima</th>
-                                <th>Tipo Proforma</th>
-                                <th>Hospital</th>
-                                <th>Empresa</th>
-                                <th>Iva</th>
-                                <th>TotalGmc</th>
-                                <th>TotalIms</th>
-                                <th>TotalGer</th>
-                                <th>Edicion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-
-                
+                <table id="tbproforma" class="table table-sm table-striped" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Edicion</th>
+                            <th>Fecha Registro</th>
+                            <th>Numero Proforma</th>
+                            <th>Codigo Infima</th>
+                            <th>Tipo Proforma</th>
+                            <th>Hospital</th>
+                            <th>Empresa</th>
+                            <th>TotalGmc</th>
+                            <th>TotalIms</th>
+                            <th>TotalGer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <div id="pagination" class="text-center mt-3"></div>
+        
     </div>
 </div>
 
@@ -490,6 +493,15 @@
     <script src="~/vendor/jquery-ui/jquery-ui.js"></script>
     <script src="~/vendor/jquery-ui/idioma/datepicker-es.js"></script>
     <script src="~/js/vistas/Historial_Proforma.js"></script>
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
    
 }
 

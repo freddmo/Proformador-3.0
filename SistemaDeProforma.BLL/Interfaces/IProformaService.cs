@@ -9,7 +9,8 @@ namespace SistemaDeProforma.BLL.Interfaces
         Task<List<Hospital>> ObtenerHospital(string pesquisa);
         Task<Proforma> Registrar(Proforma entidad);
 
-        Task<List<Proforma>> Historial(string numeroProforma, string nic, string empresa, string fechaInicio, string fechaFin);
+        Task<List<Proforma>> Historial(string numeroProforma,string hospi, string nic, string empresa, string fechaInicio, string fechaFin);
+        Task<List<Proforma>> ObtenerProforma(string numeroProforma, string hospi, string nic, string empresa, string fechaInicio, string fechaFin);
         Task<Proforma> DetalleGMC(string numeroProforma, string empresa);
         Task<Proforma> DetalleIMS(string numeroProforma, string empresa);
         Task<Proforma> DetalleGER(string numeroProforma, string empresa);

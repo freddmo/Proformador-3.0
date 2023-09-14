@@ -38,13 +38,13 @@ $(document).ready(function () {
             if (responseJson.estado) {
                 const ims = responseJson.objeto
 
-                $("#txtCanton2").val(ims.numeroDocumento)
-                $("#txtRazonSocial2").val(ims.nombre)
-                $("#txtCorreo2").val(ims.correo)
-                $("#txtDireccion2").val(ims.direccion)
-                $("#txTelefono2").val(ims.telefono)
-                $("#txtRuc2").val(ims.ruc)
-                $("#imgLogo2").attr("src", ims.urlLogo)
+                $("#txtCantonIMS").val(ims.numeroDocumento)
+                $("#txtRazonSocialIMS").val(ims.nombre)
+                $("#txtCorreoIMS").val(ims.correo)
+                $("#txtDireccionIMS").val(ims.direccion)
+                $("#txTelefonoIMS").val(ims.telefono)
+                $("#txtRucIMS").val(ims.ruc)
+                $("#imgLogoIMS").attr("src", ims.urlLogo)
             } else {
                 swal("Lo sentimos", responseJson.mensaje, "error")
             }
@@ -62,19 +62,45 @@ $(document).ready(function () {
             if (responseJson.estado) {
                 const ger = responseJson.objeto
 
-                $("#txtCanton3").val(ger.numeroDocumento)
-                $("#txtRazonSocial3").val(ger.nombre)
-                $("#txtCorreo3").val(ger.correo)
-                $("#txtDireccion3").val(ger.direccion)
-                $("#txTelefono3").val(ger.telefono)
-                $("#txtRuc3").val(ger.ruc)
-                $("#imgLogo3").attr("src", ger.urlLogo)
+                $("#txtCantonGER").val(ger.numeroDocumento)
+                $("#txtRazonSocialGER").val(ger.nombre)
+                $("#txtCorreoGER").val(ger.correo)
+                $("#txtDireccionGER").val(ger.direccion)
+                $("#txTelefonoGER").val(ger.telefono)
+                $("#txtRucGER").val(ger.ruc)
+                $("#imgLogoGER").attr("src", ger.urlLogo)
             } else {
                 swal("Lo sentimos", responseJson.mensaje, "error")
             }
         })
+
+    limitInputLength('txtCantonIMS', 50);
+    limitInputLength('txTelefonoIMS', 50);
+    limitInputLength('txtDireccionIMS', 150);
+    limitInputLength('txtCorreoIMS', 50);
+    limitInputLength('txtRazonSocialIMS', 50);
+
+    limitInputLength('txtCanton', 50);
+    limitInputLength('txTelefono', 50);
+    limitInputLength('txtDireccion', 150);
+    limitInputLength('txtCorreo', 50);
+    limitInputLength('txtRazonSocial', 50);
+
+    limitInputLength('txtCantonGER', 50);
+    limitInputLength('txTelefonoGER', 50);
+    limitInputLength('txtDireccionGER', 150);
+    limitInputLength('txtCorreoGER', 50);
+    limitInputLength('txtRazonSocialGER', 50);
 })
 
+function limitInputLength(inputId, maxLength) {
+    $('#' + inputId).on('input', function () {
+        if ($(this).val().length > maxLength) {
+            $(this).val($(this).val().substring(0, maxLength));
+            toastr.warning("Pasaste el límite de caracteres", "");
+        }
+    });
+}
 
 $("#btnGuardarCambios").click(function () {
 
