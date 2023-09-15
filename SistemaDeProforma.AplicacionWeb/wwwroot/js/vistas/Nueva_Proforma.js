@@ -1,6 +1,8 @@
 ﻿// ---------------------------------------------------SECCION PARA TENER EL TIPO DE PROFORMA
 $(document).ready(function () {
 
+    
+
     fetch("/Proformar/ListaTipoProforma")
         .then(response => {
             return response.ok ? response.json() : Promise.reject(response);
@@ -16,36 +18,41 @@ $(document).ready(function () {
             }
         })
 
+    // Define a variable to store the previous value of #txtCodigoInfima
+    let previousTxtCodigoInfimaValue;
+
     const selectElement = document.getElementById('cboTipoProforma');
     selectElement.addEventListener('change', function () {
-        
-        
         const selectedOption = selectElement.options[selectElement.selectedIndex];
-       
         const selectedText = selectedOption.text;
 
         console.log('Selected Text:', selectedText);
 
-        if (selectedText === "Infima Cuantia") {
-
-        } else if (selectedText === "General") {
-            $("#txtCodigoInfima").val(0)
+        if (selectedText === "General" || selectedText === "Subasta") {
+            // Store the previous value before setting it to 0
+            previousTxtCodigoInfimaValue = $("#txtCodigoInfima").val();
+            $("#txtCodigoInfima").val(0);
+        } else {
+            // If not "General" or "Subasta", restore the previous value
+            if (previousTxtCodigoInfimaValue !== undefined) {
+                $("#txtCodigoInfima").val(previousTxtCodigoInfimaValue);
+            }
         }
-
     });
 
-    limitInputLength('txtCvpGMC', 70);
-    limitInputLength('txtCvpIMS', 70);
-    limitInputLength('txtCvpGER', 70);
-    limitInputLength('txtFpagoGMC', 70);
-    limitInputLength('txtFpagoIMS', 70);
-    limitInputLength('txtFpagoGER', 70);
-    limitInputLength('txtCtecnicaGMC', 70);
-    limitInputLength('txtCtecnicaIMS', 70);
-    limitInputLength('txtCtecnicaGER', 70);
-    limitInputLength('txtTentregaGMC', 70);
-    limitInputLength('txtTentregaIMS', 70);
-    limitInputLength('txtTentregaGER', 70);
+
+    limitInputLength('txtCvpGMC', 44);
+    limitInputLength('txtCvpIMS', 44);
+    limitInputLength('txtCvpGER', 44);
+    limitInputLength('txtFpagoGMC', 42);
+    limitInputLength('txtFpagoIMS', 42);
+    limitInputLength('txtFpagoGER', 42);
+    limitInputLength('txtCtecnicaGMC', 36);
+    limitInputLength('txtCtecnicaIMS', 36);
+    limitInputLength('txtCtecnicaGER', 36);
+    limitInputLength('txtTentregaGMC', 62);
+    limitInputLength('txtTentregaIMS', 62);
+    limitInputLength('txtTentregaGER', 62);
     limitInputLength('txtObservacionGMC', 500);
     limitInputLength('txtObservacionIMS', 500);
     limitInputLength('txtObservacionGER', 500);
@@ -1028,12 +1035,15 @@ let vmDetalleProductoProforma = [];
 
 $("#btnTerminarProforma").click(function () {
 
+   
     var inputrs = document.getElementById('txtRazonSocial')
 
     if (inputrs.value === "") {
         toastr.warning("", "Debe Ingresar el hospital")
         return;
     }
+
+    
     //se quedara en ProductosParaProformaGMC por que sirve tambien para germedic e imsumed
     if (ProductosParaProformaA.length < 1) {
         toastr.warning("", "Debe Ingresar productos")
@@ -1584,8 +1594,12 @@ $("#btnprueba").click(function () {
                     $("#txtTotalGMC").val(responseData[0].totalGmc)
                     if (responseData[0].idTipoProforma === 1) {
                         $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                    } else {
+                    } else if (responseData[0].idTipoProforma === 2) {
                         $("#cboTipoProforma").val($("#cboTipoProforma option:second").val())
+                    } else if (responseData[0].idTipoProforma === 3) {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:third").val())
+                    } else {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:fourth").val())
                     }
                    
 
@@ -1608,9 +1622,14 @@ $("#btnprueba").click(function () {
                     $("#txtTotalIMS").val(responseData[0].totalIms)
                     if (responseData[0].idTipoProforma === 1) {
                         $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                    } else {
+                    } else if (responseData[0].idTipoProforma === 2) {
                         $("#cboTipoProforma").val($("#cboTipoProforma option:second").val())
+                    } else if (responseData[0].idTipoProforma === 3) {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:third").val())
+                    } else {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:fourth").val())
                     }
+
                     $("#btnprueba").val("")
                     
                 } else if (responseData[0].detalleTipoEmpresa === "GERMEDIC") {
@@ -1630,8 +1649,12 @@ $("#btnprueba").click(function () {
                     $("#txtTotalGER").val(responseData[0].totalGer)
                     if (responseData[0].idTipoProforma === 1) {
                         $("#cboTipoProforma").val($("#cboTipoProforma option:first").val())
-                    } else {
+                    } else if (responseData[0].idTipoProforma === 2) {
                         $("#cboTipoProforma").val($("#cboTipoProforma option:second").val())
+                    } else if (responseData[0].idTipoProforma === 3) {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:third").val())
+                    } else {
+                        $("#cboTipoProforma").val($("#cboTipoProforma option:fourth").val())
                     }
                     $("#btnprueba").val("")
                 } else {

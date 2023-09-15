@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <title>GMC_Nro_@Model.proforma.NumeroProforma - Infima Cuantia @Model.proforma.EtiquetaGmc - @Model.proforma.RazonSocial</title>
+    <title>GMC_Nro_@Model.proforma.NumeroProforma - codigo @Model.proforma.EtiquetaGmc - @Model.proforma.RazonSocial</title>
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -145,8 +145,24 @@
                     <td class="part-right">Proforma Nro.@Model.proforma.NumeroProforma</td>
                 </tr>
                 <tr>
-                    <td><p class="title-1 centrear">Código de Necesidad de Infima Cuantía: @Model.proforma.CodigoInfima </p></td>
+                    @if (Model.proforma.TipoProforma == "Contratación")
+                    {
+                        <p class="title-1 centrear">Código de Necesidad de Contratación: @Model.proforma.CodigoInfima</p>
+                    }
+                    else if (Model.proforma.TipoProforma == "General")
+                    {
+                        <p class="title-1 centrear">COTIZACIÓN DE MEDICAMENTOS</p>
+                    }
+                    else if (Model.proforma.TipoProforma == "Subasta")
+                    {
+                        <p class="title-1 centrear">Oferta Final del Proceso de Subasta</p>
+                    }
+                    else
+                    {
+                    <p class="title-1 centrear">Código de Necesidad de Infima Cuantía: @Model.proforma.CodigoInfima</p>
+                    }
                 </tr>
+
                 <tr>
                     <td>Razon Social: @Model.proforma.RazonSocial</td>
                 </tr>
@@ -169,11 +185,11 @@
         <table class="tbproductos">
             <thead>
                 <tr>
-                    @if (Model.proforma.TipoProforma != "General")
+                    @if (Model.proforma.TipoProforma != "General" && Model.proforma.TipoProforma != "Subasta")
                     {
                         <th>CPC</th>
                     }
-                    @if (Model.proforma.TipoProforma != "Infima Cuantia")
+                    @if (Model.proforma.TipoProforma != "Infima Cuantia" && Model.proforma.TipoProforma != "Contratación")
                     {
                         <th>CUM</th>
                     }
@@ -190,11 +206,11 @@
                 @foreach (var item in Model.proforma.DetalleProductoProformas)
                 {
                     <tr>
-                        @if (Model.proforma.TipoProforma != "General")
+                        @if (Model.proforma.TipoProforma != "General" && Model.proforma.TipoProforma != "Subasta")
                         {
                             <td class="td-item">@item.Cpc</td>
                         }
-                        @if (Model.proforma.TipoProforma != "Infima Cuantia")
+                        @if (Model.proforma.TipoProforma != "Infima Cuantia" && Model.proforma.TipoProforma != "Contratación")
                         {
                             <td class="td-item">@item.Cum</td>
                         }
@@ -208,7 +224,7 @@
                         <td class="td-item">@item.TotalUgmc</td>
                     </tr>
                 }
-                @if (Model.proforma.TipoProforma == "General")
+                @if (Model.proforma.TipoProforma != "General" && Model.proforma.TipoProforma != "Subasta")
                 {
                     <tr>
                         <td colspan="6"></td>
@@ -296,24 +312,7 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var tipoProforma = "@Model.proforma.TipoProforma";
-
-        if (tipoProforma === "General") {
-            
-            changeNecesidadText();
-        } 
-    });
-
-
-
-    function changeNecesidadText() {
-        var necesidadTd = document.querySelector("td > p.title-1");
-        if (necesidadTd) {
-            necesidadTd.textContent = "COTIZACIÓN DE MEDICAMENTOS";
-            necesidadTd.style.textAlign = "center";
-        }
-    }
+    
 </script>
 
 

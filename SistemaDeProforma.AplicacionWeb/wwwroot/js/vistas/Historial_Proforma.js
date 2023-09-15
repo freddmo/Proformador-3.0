@@ -303,7 +303,7 @@ $("#tbproforma tbody").on("click", ".btn-info", function () { //Seccion para edi
         $("#txtTotal").val(d.totalGmc)
 
 
-        if (d.tipoProforma === "Infima Cuantia") {
+        if (d.tipoProforma === "Infima Cuantia" || d.tipoProforma === "Contratación") {
 
             $("#tbProductos tbody").html("");
 
@@ -323,7 +323,7 @@ $("#tbproforma tbody").on("click", ".btn-info", function () { //Seccion para edi
                     )
                 )
             })
-        } else if (d.tipoProforma === "General") {
+        } else if (d.tipoProforma === "General" || d.tipoProforma === "Subasta") {
 
             $("#tbProductos tbody").html("");
 
@@ -370,7 +370,7 @@ $("#tbproforma tbody").on("click", ".btn-info", function () { //Seccion para edi
         $("#txtIvaIMS").val(d.ivaTotalIMS)
         $("#txtTotalIMS").val(d.totalIms)
 
-        if (d.tipoProforma === "Infima Cuantia") {
+        if (d.tipoProforma === "Infima Cuantia" || d.tipoProforma === "Contratación") {
 
             $("#tbimsProductos tbody").html("");
 
@@ -390,7 +390,7 @@ $("#tbproforma tbody").on("click", ".btn-info", function () { //Seccion para edi
                 )
             })
 
-        } else if (d.tipoProforma === "General") {
+        } else if (d.tipoProforma === "General" || d.tipoProforma === "Subasta") {
 
             $("#tbimsProductos tbody").html("");
 
@@ -437,7 +437,7 @@ $("#tbproforma tbody").on("click", ".btn-info", function () { //Seccion para edi
         $("#txtIvaGER").val(d.ivaTotalGER)
         $("#txtTotalGER").val(d.totalGer)
 
-        if (d.tipoProforma === "Infima Cuantia") {
+        if (d.tipoProforma === "Infima Cuantia" || d.tipoProforma === "Contratación") {
 
             $("#tbgerProductos tbody").html("");
 
@@ -453,7 +453,7 @@ $("#tbproforma tbody").on("click", ".btn-info", function () { //Seccion para edi
                 )
             })
 
-        } else if (d.tipoProforma === "General") {
+        } else if (d.tipoProforma === "General" || d.tipoProforma === "Subasta") {
 
             $("#tbgerProductos tbody").html("");
 

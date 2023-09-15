@@ -10,7 +10,7 @@
 
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>GERMEDIC_Nro_@Model.proforma.NumeroProforma - Infima Cuantia @Model.proforma.EtiquetaGer - @Model.proforma.RazonSocial</title>
+    <title>GERMEDIC_Nro_@Model.proforma.NumeroProforma - @Model.proforma.EtiquetaGer - @Model.proforma.RazonSocial</title>
     <style>
 
         header {
@@ -178,7 +178,22 @@
                         </tr>
                             
                         <tr>
-                            <td><p class="title-1 centrear" style="width:100%"> Código de Infima Cuantía: @Model.proforma.CodigoInfima </p></td>
+                            @if (Model.proforma.TipoProforma == "Contratación")
+                            {
+                                <p class="title-1 centrear">Código de Necesidad de Contratación: @Model.proforma.CodigoInfima</p>
+                            }
+                            else if (Model.proforma.TipoProforma == "General")
+                            {
+                                <p class="title-1 centrear">COTIZACIÓN DE MEDICAMENTOS</p>
+                            }
+                            else if (Model.proforma.TipoProforma == "Subasta")
+                            {
+                                <p class="title-1 centrear">Oferta Final del Proceso de Subasta</p>
+                            }
+                            else
+                            {
+                                <p class="title-1 centrear">Código de Necesidad de Infima Cuantía: @Model.proforma.CodigoInfima</p>
+                            }
                             
                         </tr>
                         <tr>
@@ -216,11 +231,11 @@
 
             <thead>
                 <tr>
-                    @if (Model.proforma.TipoProforma != "General")
+                    @if (Model.proforma.TipoProforma != "General" && Model.proforma.TipoProforma != "Subasta")
                     {
                     <th>CPC</th>
                     }
-                    @if (Model.proforma.TipoProforma != "Infima Cuantia")
+                    @if (Model.proforma.TipoProforma != "Infima Cuantia" && Model.proforma.TipoProforma != "Contratación")
                     {
                         <th>CUM</th>
                     }
@@ -237,11 +252,11 @@
                     foreach (var item in Model.proforma.DetalleProductoProformas)
                     {
                         <tr>
-                            @if (Model.proforma.TipoProforma != "General")
+                            @if (Model.proforma.TipoProforma != "General" && Model.proforma.TipoProforma != "Subasta")
                             {
                                 <td class="td-item"><p class="item">@item.Cpc</p></td>
                             }
-                            @if (Model.proforma.TipoProforma != "Infima Cuantia")
+                            @if (Model.proforma.TipoProforma != "Infima Cuantia" && Model.proforma.TipoProforma != "Contratación")
                             {
                                 <td class="td-item"><p class="item">@item.Cum</p></td>
                             }
@@ -262,7 +277,7 @@
                     <td class="td-item">
                         <p class="item-2">SUB TOTAL</p>
                     </td>
-                    <td class="item">
+                    <td class="td-item">
                         <p class="item"> @Model.proforma.SubtotalGer</p>
                     </td>
                 </tr>
@@ -270,15 +285,15 @@
                     <td class="td-item">
                         <p class="item-2">IVA</p>
                     </td>
-                    <td class="item">
-                        <p>@Model.proforma.IvaTotalGER</p>
+                    <td class="td-item">
+                        <p class="item">@Model.proforma.IvaTotalGER</p>
                     </td>
                 </tr>
                 <tr>
                     <td class="item-2">
                         <p>TOTAL</p>
                     </td>
-                    <td class="item">
+                    <td class="td-item item-2">
                         <p>@Model.proforma.TotalGer</p>
                     </td>
                 </tr>
@@ -353,22 +368,5 @@
 </html>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var tipoProforma = "@Model.proforma.TipoProforma";
-
-        if (tipoProforma === "General") {
-
-            changeNecesidadText();
-        }
-    });
-
-
-
-    function changeNecesidadText() {
-        var necesidadTd = document.querySelector("td > p.title-1");
-        if (necesidadTd) {
-            necesidadTd.textContent = "PROFORMA PARA LA COTIZACIÓN DE MEDICAMENTOS";
-            
-        }
-    }
+    
 </script>
