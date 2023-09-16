@@ -3,41 +3,24 @@
 El objetivo de esta pagina web es crear un documento PDF que contiene informacion de la empresa, datos de la institucion a la que se va a relaizar la proforma, detalles de los productos a ofertar, y el valor total de la proforma. 
 
 
-## Modo Escritorio y Modo Móvil
+## Modo de Visualización
 
-#### Escritorio
-
---Insertar aqui imagen #1 --
-
-#### Móvil
-
---Insertar aqui imagen #15 --
-
-## Secciones
 
 <details>
-  <summary><strong>Administración</strong></summary>
+<summary><strong>Escritorio</strong></summary>
 
-  - Usuarios
-  - Empresas
-  </details>
-
- <details>
-  <summary><strong>Registros</strong></summary>
-
-  - Hospitales
-  - Medicamentos
-  </details>
-
- <details>
-  <summary><strong>Proformar</strong></summary>
-
-  - Proformador3K
-  - Historial
-  </details>
+![1 - Pantalla de Inicio](https://github.com/freddmo/Proformador-3.0/assets/70821494/7707e7da-e04b-4b7d-af1e-210e7306eeef)
 </details>
 
-## Pantalla de Administración
+<details>
+<summary><strong>Móvil</strong></summary>
+
+![15 - Movil Pantalla de Inicio con barra de opciones](https://github.com/freddmo/Proformador-3.0/assets/70821494/3dcc0191-1f51-4872-b92d-8a10ab0fe4bd)
+</details>
+
+# Secciones
+
+### Pantalla de Administración
 
 La Sección de Administración está dividida en 2 subsecciones: Usuario y Empresas. Se creó con el objetivo de guardar y/o editar información de las empresas y de la persona que crea la proforma.
 
@@ -49,7 +32,7 @@ Solo el usuario con rol de administrador tiene acceso a la lista de usuarios. É
 
 - Version Escritorio
 
-    --Insertar aquí imagen #5 --
+   ![5 - Pantalla Usuario](https://github.com/freddmo/Proformador-3.0/assets/70821494/41a5a909-5159-4127-a1ea-fa5b8300a8a1)
 
 - Version Móvil
 
@@ -63,7 +46,7 @@ Esta subsección contiene información de las 3 empresas: GMC, IMSUMED, GERMEDIC
 
 - Version Escritorio
 
-    --Insertar aquí imagen #6 --
+    ![6 - Pantalla Empresas](https://github.com/freddmo/Proformador-3.0/assets/70821494/e07269a2-3026-4254-af64-1590725bc618)
 
 - Version Móvil
 
@@ -71,7 +54,7 @@ Esta subsección contiene información de las 3 empresas: GMC, IMSUMED, GERMEDIC
 </details>
 
 
-## Pantalla de Registros
+### Pantalla de Registros
 La Seccion de Registros esta dividida en 2 subsecciones: Hospitales y Productos. Se creó con el objetivo de guardar y/o editar informacion de los productos y hospitales a quien se les va a proformar.
 
 <details>
@@ -90,11 +73,13 @@ IVA: A menos que se indique, siempre se pone cero.
 
 - Version Escritorio
 
-    --Insertar aqui imagen #8 y #13 --
-
+    ![8 - Pantalla Medicamentos](https://github.com/freddmo/Proformador-3.0/assets/70821494/87eba827-01b4-4c3f-89e6-113eced9865d)
+    ![13 - Registro de producto](https://github.com/freddmo/Proformador-3.0/assets/70821494/b21bfd49-5bf1-428e-8881-314061f565ec)
+  
 - Version Móvil
 
-    --Insertar aqui imagen #21 y #27 --
+    ![21 - movil pantalla productos](https://github.com/freddmo/Proformador-3.0/assets/70821494/53f8d7c3-1da3-4ed0-98c9-2e08d651d8ca)
+    ![27 - movil registro de productos](https://github.com/freddmo/Proformador-3.0/assets/70821494/1eda2074-bc63-498f-880c-94a5dd07a67f)
 </details>
 
 <details>
@@ -109,14 +94,19 @@ Canton
 
 - Version Escritorio
 
-    --Insertar aqui imagen #7 y #12 --
+    ![7 - Pantalla Hospitales](https://github.com/freddmo/Proformador-3.0/assets/70821494/bcc32ae7-df03-4a9d-a364-a8c8d3ee257c)
+    ![12 - Registro de Hospital](https://github.com/freddmo/Proformador-3.0/assets/70821494/e0fd78c5-fb3c-4ec7-8578-16eb32f2d9a6)
+
 
 - Version Móvil
 
-    --Insertar aqui imagen #22 y #26 --
+    ![22 - movil pantalla hospitales](https://github.com/freddmo/Proformador-3.0/assets/70821494/a6257c9b-384d-446a-a06f-4a65e41eb7cc)
+bd2-8623-6e196baf8617)
+    ![26 - movil registro de hospital](https://github.com/freddmo/Proformador-3.0/assets/70821494/ce185d4f-0864-4174-974e-412e1d6aef41)
+
 </details>
 
-## Pantalla de Proformar
+### Pantalla de Proformar
 La Seccion de Proformar esta dividida en 2 subsecciones: Proformador3K e Historial. Se creó con el objetivo de crear proformas de una manera mas rapida que las anterirores versiones y verificar que se hizo de manera correcta las proformas.
 
 <details>
@@ -147,24 +137,80 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
     --Insertar aqui video --
 </details>
 
-## Documentos PDF
+# Documentos PDF
 
 #### Ínfima Cuantía
-- Proforma Ínfima Cuantía GMC
-- Proforma Ínfima Cuantía IMSUMED
-- Proforma Ínfima Cuantía GERMEDIC
+<details>
+  <summary>Proforma Ínfima Cuantía GMC</summary>
+  <img src="url_to_image1" alt="Image1">
+</details>
+
+<details>
+  <summary>Proforma Ínfima Cuantía IMSUMED</summary>
+  <img src="url_to_image2" alt="Image2">
+</details>
+
+<details>
+  <summary>Proforma Ínfima Cuantía GERMEDIC</summary>
+  <img src="url_to_image3" alt="Image3">
+</details>
+
 #### Contratación
-- Proforma Contratación GMC
-- Proforma Contratación IMSUMED
-- Proforma Contratación GERMEDIC
+<details>
+  <summary>Proforma Contratación GMC</summary>
+  <img src="url_to_image4" alt="Image4">
+</details>
+
+<details>
+  <summary>Proforma Contratación IMSUMED</summary>
+  <img src="url_to_image5" alt="Image5">
+</details>
+
+<details>
+  <summary>Proforma Contratación GERMEDIC</summary>
+  <img src="url_to_image6" alt="Image6">
+</details>
+
 #### General
-- Proforma Cotización GMC
-- Proforma Cotización IMSUMED
-- Proforma Cotización GERMEDIC
+<details>
+  <summary>Proforma Cotización GMC</summary>
+  <img src="url_to_image7" alt="Image7">
+</details>
+
+<details>
+  <summary>Proforma Cotización IMSUMED</summary>
+  <img src="url_to_image8" alt="Image8">
+</details>
+
+<details>
+  <summary>Proforma Cotización GERMEDIC</summary>
+  <img src="url_to_image9" alt="Image9">
+</details>
+
 #### Subasta
-- Proforma Subasta GMC
-- Proforma Subasta IMSUMED
-- Proforma Subasta GERMEDIC
+<details>
+  <summary>Proforma Subasta GMC</summary>
+  <img src="url_to_image10" alt="Image10">
+</details>
+
+<details>
+  <summary>Proforma Subasta IMSUMED</summary>
+  <img src="url_to_image11" alt="Image11">
+</details>
+
+<details>
+  <summary>Proforma Subasta GERMEDIC</summary>
+  <img src="url_to_image12" alt="Image12">
+</details>
+
+
+
+
+
+
+
+
+
 ## Features
 
 - IDE(integrated development environment): Microsoft Visual Studio Community 2022
