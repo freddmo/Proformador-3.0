@@ -3,7 +3,7 @@
 El objetivo de esta pagina web es crear un documento PDF que contiene informacion de la empresa, datos de la institucion a la que se va a relaizar la proforma, detalles de los productos a ofertar, y el valor total de la proforma. 
 
 
-## Modo de Visualización
+### Modo de Visualización
 
 
 <details>
@@ -18,7 +18,7 @@ El objetivo de esta pagina web es crear un documento PDF que contiene informacio
 ![15 - Movil Pantalla de Inicio con barra de opciones](https://github.com/freddmo/Proformador-3.0/assets/70821494/3dcc0191-1f51-4872-b92d-8a10ab0fe4bd)
 </details>
 
-## Features
+# Features
 
 ### Entorno de Desarrollo
 
@@ -32,27 +32,109 @@ El objetivo de esta pagina web es crear un documento PDF que contiene informacio
 - Object-Relational Mapping (ORM) framework: Entity Framework (EF)
 ### Dependencias y Librerías
 -   Librerías: DinktoPDF Library & Automapper
-      -   Archivos:libwkhtmltox.dll, libwkhtmltox.dylib, libwkhtmltox.so
-      -   Localización: Utilidades\LibreriaPDF\(aqui esta el archivo)
+      -   Archivos: **libwkhtmltox.dll**, **libwkhtmltox.dylib**, **libwkhtmltox.so**
+      -   Localización: **Utilidades\LibreriaPDF\(aqui esta el archivo)**
 -   Servicios Externos
       -   Almacenamiento en la Nube: Firebase Storage
 -   Servidor de Correo Electrónico: Gmail Server
 
 ### Paquetes Nugget
-Localización: SistemaDeProforma.AplicacioWeb
+**Localización: SistemaDeProforma.AplicacioWeb**
+
+```ruby
    - "Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14"
    - "AutoMapper" Version="11.0.1"
    - "AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"
    - "DinkToPdf" Version="1.0.8"
+```
 
-Localización: SistemaDeProforma.Entity  
+**Localización: SistemaDeProforma.Entity** 
+
+```ruby
    - "Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" 
    - "Microsoft.EntityFrameworkCore.Tools" Version="7.0.7"
+```
 
-Localización: SistemaDeProforma.BLL 
+**Localización: SistemaDeProforma.BLL**
+
+```ruby
    - "FirebaseAuthentication.net" Version="3.7.2"
    - "FirebaseStorage.net" Version="1.0.3"
-     
+```
+
+# Instalación
+### **Requisitos previos:**
+
+ - Tener instalado Microsoft Visual Studio Community 2022 en el sistema.
+ - Contar con SQL Server Management Studio 19 para la gestión de la base de datos.
+ - Tener .NET 6 SDK instalado en el sistema.
+
+### **1. Clonar el repositorio**
+```ruby
+
+git clone https://github.com/freddmo/Proformador-3.0.git
+
+```
+### **2. Configurar la base de datos**
+    
+ En el archivo appsettings.json remplazar la antigua linea de código con:
+```ruby
+
+ "CadenaSQL": "Server=YourServerAddress;Database=YourDatabaseName;User Id=YourUsername;Password=YourPassword;TrustServerCertificate=true;MultipleActiveResultSets=true"
+
+```
+### **3. Certificado SSL**
+  - Para testeo local de la pagina web al momento de compilar el proyecto es necesario habilitar SSL.
+    
+     -  Tutorial: https://www.youtube.com/watch?v=MQ-pWLYCn7k
+  - Para el entorno de producción es necesario conseguir un certificado mas seguro.
+    
+### **4. Restaurar paquetes de Nugget**
+   
+Para cada proyecto (SistemaDeProforma.AplicacioWeb, SistemaDeProforma.Entity, SistemaDeProforma.BLL), abrir la Consola del Administrador de Paquetes NuGet (Herramientas -> Administrador de Paquetes NuGet ->       Consola del Administrador de Paquetes) y ejecutar el siguiente comando para restaurar los paquetes NuGet:
+```ruby
+
+dotnet restore
+
+```
+### **5. Configurar librerías DinktoPDF**
+   
+Asegúrarse de que los archivos **libwkhtmltox.dll**, **libwkhtmltox.dylib**, **libwkhtmltox.so** estén ubicados en la carpeta de utilidades del proyecto SistemaDeProforma.AplicacionWeb.
+
+### **6. Configurar los servicios externos**
+   
+Las credenciales necesarias para configurar los servicios de Gmail Server y Firebase Storage se encuentran en la tabla de datos "Configuracion" en la base de datos.
+
+A continuación, se detalla cómo acceder a estas credenciales:
+
+<details>
+ <summary><b>Gmail Server (Servicio_Correo):</b></summary>
+- **correo:** Correo electrónico de la cuenta de Gmail que se utilizará para enviar correos electrónicos.
+- **clave:** Contraseña de la cuenta de Gmail asociada al correo electrónico.
+- **alias:** Alias o nombre de la cuenta de correo.
+- **host:** Host SMTP de Gmail (smtp.gmail.com).
+- **puerto:** Puerto SMTP de Gmail (587 por defecto).
+
+</details>
+
+<details>
+ <summary><b>Firebase Storage (FireBase_Storage):</b></summary>
+
+- email: Correo electrónico de la cuenta de Firebase Storage.
+- clave: Clave de la cuenta de Firebase Storage.
+- ruta: Ruta del proyecto de Firebase Storage.
+- api_key: Clave de API de Firebase Storage.
+- carpeta_usuario: Nombre de la carpeta para almacenar imágenes de usuario en Firebase Storage.
+- carpeta_producto: Nombre de la carpeta para almacenar imágenes de producto en Firebase Storage.
+- carpeta_logo: Nombre de la carpeta para almacenar imágenes de logo en Firebase Storage.
+
+</details>
+
+
+Estas credenciales son esenciales para el funcionamiento adecuado de la aplicación. 
+
+### **7. Ejecutar la aplicación.**
+   
 # Secciones
 
 ### Pantalla de Administración
@@ -265,6 +347,5 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
 
    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
  </None>
-- also we use ajax,
-- Cambio de la cadena SQL: "CadenaSQL": "Server=YourServerAddress;Database=YourDatabaseName;User Id=YourUsername;Password=YourPassword;TrustServerCertificate=true;MultipleActiveResultSets=true"
-- video de How to enable SSL in VIsual studio for NET Project
+
+
