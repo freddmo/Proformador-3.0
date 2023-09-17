@@ -18,6 +18,41 @@ El objetivo de esta pagina web es crear un documento PDF que contiene informacio
 ![15 - Movil Pantalla de Inicio con barra de opciones](https://github.com/freddmo/Proformador-3.0/assets/70821494/3dcc0191-1f51-4872-b92d-8a10ab0fe4bd)
 </details>
 
+## Features
+
+### Entorno de Desarrollo
+
+- IDE(integrated development environment): Microsoft Visual Studio Community 2022
+- DBMS(database management system): SQL Server Management Studio 19
+- Programming Language: C#
+### Arquitectura y Frameworks
+-   Arquitectura N-tier
+-   Arquitectura Modelo-Vista-Controlador (MVC)
+-   Framework Web: ASP.NET Core 6
+- Object-Relational Mapping (ORM) framework: Entity Framework (EF)
+### Dependencias y Librerías
+-   Librerías: DinktoPDF Library & Automapper
+      -   Archivos:libwkhtmltox.dll, libwkhtmltox.dylib, libwkhtmltox.so
+      -   Localización: Utilidades\LibreriaPDF\(aqui esta el archivo)
+-   Servicios Externos
+      -   Almacenamiento en la Nube: Firebase Storage
+-   Servidor de Correo Electrónico: Gmail Server
+
+### Paquetes Nugget
+Localización: SistemaDeProforma.AplicacioWeb
+   - "Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14"
+   - "AutoMapper" Version="11.0.1"
+   - "AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"
+   - "DinkToPdf" Version="1.0.8"
+
+Localización: SistemaDeProforma.Entity  
+   - "Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" 
+   - "Microsoft.EntityFrameworkCore.Tools" Version="7.0.7"
+
+Localización: SistemaDeProforma.BLL 
+   - "FirebaseAuthentication.net" Version="3.7.2"
+   - "FirebaseStorage.net" Version="1.0.3"
+     
 # Secciones
 
 ### Pantalla de Administración
@@ -142,65 +177,84 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
 #### Ínfima Cuantía
 <details>
   <summary>Proforma Ínfima Cuantía GMC</summary>
-  <img src="url_to_image1" alt="Image1">
+   
+  ![IC GMC](https://github.com/freddmo/Proformador-3.0/assets/70821494/9fee3e53-5403-4d70-a1e5-0e4f6609c0a4)
 </details>
+
+
+
 
 <details>
   <summary>Proforma Ínfima Cuantía IMSUMED</summary>
-  <img src="url_to_image2" alt="Image2">
+   
+  ![IC IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/6d3838b3-2205-4d76-b280-c19aaf8be703)
 </details>
 
 <details>
   <summary>Proforma Ínfima Cuantía GERMEDIC</summary>
-  <img src="url_to_image3" alt="Image3">
+   
+  ![IC GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/a0279bc8-83b7-4a56-9bbb-1a058f0a992f)
 </details>
 
 #### Contratación
 <details>
   <summary>Proforma Contratación GMC</summary>
-  <img src="url_to_image4" alt="Image4">
+  
+   ![Contratacion GMC](https://github.com/freddmo/Proformador-3.0/assets/70821494/9d3784fc-ba76-43f0-9af0-ea01821b19df)
 </details>
 
 <details>
   <summary>Proforma Contratación IMSUMED</summary>
-  <img src="url_to_image5" alt="Image5">
+  
+   ![Contratacion IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/ed1f1fe2-8f0a-4ec4-82a3-c27633150005)
 </details>
 
 <details>
   <summary>Proforma Contratación GERMEDIC</summary>
-  <img src="url_to_image6" alt="Image6">
+  
+  ![COntratacion GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/92e7fe20-d168-454a-8f1a-d00bd938398c)
+
 </details>
 
 #### General
 <details>
   <summary>Proforma Cotización GMC</summary>
-  <img src="url_to_image7" alt="Image7">
+   
+  ![Cotizacion GMC](https://github.com/freddmo/Proformador-3.0/assets/70821494/5e54cc18-7f62-40ff-bc53-a3aae1815ade)
+   
 </details>
 
 <details>
   <summary>Proforma Cotización IMSUMED</summary>
-  <img src="url_to_image8" alt="Image8">
+ 
+   ![Cotizacion IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/c0ee99fc-ff66-49e0-9758-5e04334afa00)
 </details>
 
 <details>
   <summary>Proforma Cotización GERMEDIC</summary>
-  <img src="url_to_image9" alt="Image9">
+
+![Cotizacion GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/4e715772-57ac-4fa6-988b-52ee3a31a909)
+
 </details>
 
 #### Subasta
 <details>
   <summary>Proforma Subasta GMC</summary>
-  <img src="url_to_image10" alt="Image10">
+  
+   ![Subasta GMC](https://github.com/freddmo/Proformador-3.0/assets/70821494/000122ee-deff-414f-ae0b-7588c5f5b7d0)
 </details>
 
 <details>
   <summary>Proforma Subasta IMSUMED</summary>
-  <img src="url_to_image11" alt="Image11">
+  
+   ![Subasta IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/f631f4ae-8ad8-4444-a781-b93c32105a60)
 </details>
 
 <details>
   <summary>Proforma Subasta GERMEDIC</summary>
-  <img src="url_to_image12" alt="Image12">
+  
+   ![Subasta GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/8526c8d1-41c3-4b22-a8fd-4d343be80836)
+    
 </details>
 
 
@@ -209,40 +263,8 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
 
 
 
-
-
-## Features
-
-- IDE(integrated development environment): Microsoft Visual Studio Community 2022
-- DBMS(database management system): SQL Server Management Studio 19
-- Programming Language: C#
-- N-tier Architecture
-- Model-View-Controller (MVC) architecture
-- web framework: ASP.NET core 6
-- Object-Relational Mapping (ORM) framework: Entity Framework (EF)
-- Library: DinktoPDF Library & Automapper
-- FireBase Storage
-- Gmail Server
-- Cambio de la cadena SQL: "CadenaSQL": "Server=YourServerAddress;Database=YourDatabaseName;User Id=YourUsername;Password=YourPassword;TrustServerCertificate=true;MultipleActiveResultSets=true"
-- video de How to enable SSL in VIsual studio for NET Project
-- Nugget Packages:
--     "Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.7" 
--     "Microsoft.EntityFrameworkCore.Tools" Version="7.0.7"
--     "FirebaseAuthentication.net" Version="3.7.2"
--     "FirebaseStorage.net" Version="1.0.3"
--     "AutoMapper" Version="11.0.1"
--     "AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0"
--     "DinkToPdf" Version="1.0.8"
--     "Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.14"
-- 
-  This is the code that shows where my dependencies about pdf are located.
- <None Update="Utilidades\LibreriaPDF\libwkhtmltox.dll">
-   <CopyToOutputDirectory>Always</CopyToOutputDirectory>
- </None>
- <None Update="Utilidades\LibreriaPDF\libwkhtmltox.dylib">
-   <CopyToOutputDirectory>Always</CopyToOutputDirectory>
- </None>
- <None Update="Utilidades\LibreriaPDF\libwkhtmltox.so">
    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
  </None>
 - also we use ajax,
+- Cambio de la cadena SQL: "CadenaSQL": "Server=YourServerAddress;Database=YourDatabaseName;User Id=YourUsername;Password=YourPassword;TrustServerCertificate=true;MultipleActiveResultSets=true"
+- video de How to enable SSL in VIsual studio for NET Project
