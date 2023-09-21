@@ -61,6 +61,166 @@ El objetivo de esta pagina web es crear un documento PDF que contiene informacio
    - "FirebaseAuthentication.net" Version="3.7.2"
    - "FirebaseStorage.net" Version="1.0.3"
 ```
+# Información de la capas
+- Solucion "SolutionSistemaDeProformas"
+  
+  <details>
+    <summary> SistemaDeProforma.IOC</summary>
+    
+          Contiene los archivos js,css,controllers,MovelViews,chtml.
+          
+    </details>
+  
+   <details>
+    <summary> SistemaDeProforma.BLL</summary>
+    
+  SistemaDeProforma.BLL contiene 2 carpetas: Interfaz e Implementacion.
+
+  Aqui esta la lista de cada Interfaz y sus metodos correspondientes:
+
+  **ICorreoService.cs**
+
+     - **EnviarCorreo**: Envía un correo de Gmail para restablecer contraseñas y proporcionar información del usuario.
+     - 
+
+  **IFireBaseService.cs**
+
+     - **SubirStorage**: Sube la imagen de la empresa (logo) o la foto de un usuario a la base de datos.
+     - **EliminarStorage**: Elimina la imagen de la empresa (logo) o la foto de un usuario de la base de datos.
+     - 
+
+
+  **IHospitalService.cs**
+
+     - **Lista**: Obtiene una lista de hospitales.
+     - **Crear**: Crea un registro de hospital.
+     - **Editar**: Edita un registro de hospital.
+     - **Eliminar**: Elimina un registro de hospital.
+     - 
+
+  **IMenuService.cs**
+
+     - **ObtenerMenus**: Obtiene los diferentes menús según el rol del usuario.
+     - 
+
+  **INegocioService.cs**
+
+     - **Obtener**: Obtiene información de la empresa GMC.
+     - **Conseguir**: Obtiene información de la empresa IMSUMED.
+     - **Adquirir**: Obtiene información de la empresa GERMEDIC.
+     - **GuardarCambios**: Edita y guarda cambios en la información de la empresa GMC.
+     - **GCIMS**: Edita y guarda cambios en la información de la empresa IMSUMED.
+     - **GCGER**: Edita y guarda cambios en la información de la empresa Germedic.
+     - 
+
+  **IProductoService.cs**
+
+     - **Lista**: Obtiene una lista de productos (medicamentos).
+     - **Crear**: Crea un registro de medicamento.
+     - **Editar**: Edita un registro de medicamento.
+     - **Eliminar**: Elimina un registro de medicamento.
+     - 
+
+  **IProformaService.cs**
+
+     - **ObtenerProductos**: Obtiene medicamentos.
+     - **ObtenerHospital**: Obtiene el hospital al que se le proformará.
+     - **Registrar**: Registra la proforma.
+     - **Historial**: Muestra información de proformas en la pestaña Historial.
+     - **ObtenerProforma**: Sirve como consulta para crear una proforma a partir de datos.
+     - **DetalleGMC**: Obtiene información solo de la proforma hecha por la empresa GMC.
+     - **DetalleIMS**: Obtiene información solo de la proforma hecha por la empresa IMSUMED.
+     - **DetalleGER**: Obtiene información solo de la proforma hecha por la empresa Germedic.
+     - **Reporte**: Ignorar o borrar.
+     - 
+
+  **IRolService.cs**
+
+     - **Lista**: Obtiene una lista de roles.
+     - 
+
+  **ITipoProformaService.cs**
+
+     - **Lista**: Obtiene una lista de tipos de proforma.
+     - 
+
+  **IUsuarioService.cs**
+
+     - **Lista**: Obtiene una lista de usuarios.
+     - **Crear**: Crea un usuario.
+     - **Editar**: Edita un usuario.
+     - **Eliminar**: Elimina un usuario.
+     - **ObtenerPorCredenciales**: Obtiene un usuario por credenciales.
+     - **ObtenerPorId**: Obtiene un usuario por ID.
+     - **GuardarPerfil**: Guarda el perfil del usuario.
+     - **CambiarClave**: Cambia la contraseña del usuario.
+     - **RestablecerClave**: Restablece la contraseña del usuario.
+     - 
+  
+  **IUtilidadesService.cs**
+     - **GenerarClave**: Genera una clave.
+     - **ConvertirSha256**: "Encripta" una clave.
+
+    
+    </details>
+
+   <details>
+    <summary> SistemaDeProforma.DAL</summary>
+    
+      SistemaDeProforma.DAL contien 3 carpetas: DBContext, Interface, y Implementación.
+
+      La Carpeta DbproformaContext Contiene la clase DBContext.
+      la seccion "OnConfiguring" esta vacia por que la configuracion de la base de datos esta en appsettings.json.
+
+      -------
+      La Carpeta de Interface Contiene las interfazes IGenericRepository e IproformaRepository.
+
+      IGenericRepository.cs contiene operaciones de acceso de datos.
+	      - Obtener: Se utiliza para tener la información de la empresa GMC. 
+	      - Conseguir: Se utiliza para tener la información de la empresa IMSUMED. 
+	      - Adquirir: Se utiliza para tener la información de la empresa GERMEDIC. 
+	      - Crear: Crear información.
+	      - Editar: Editar Información.
+	      - Eliminar: Eliminar Información.
+	      - Consultar: Consultar Información.
+	
+      IproformaRepository.cs contiene operaciones de acceso de datos.
+	      - Registrar: registra la nueva proforma en la base de datos.
+	      - Reporte (!aviso - no tomar en cuenta eso. Se reutilizara/cambiara/continuara luego.)
+      ------
+
+      La Carpeta de Implementacion Contiene las clases GenericRepository y proformaRepository.
+      Estas clases proporciona la lógica concreta para las operaciones de acceso a datos definidas
+      en la interfaz.
+    
+    </details>
+  
+    <details>
+    <summary> SistemaDeProforma.Entity</summary>
+    
+          Esta capa contiene 12 clases que representan las tablas de datos de la base de datos.
+
+          1. Configuracion.cs: Contiene las claves para acceder a la base de datos FireBase.
+          2. DetalleProductoProforma.cs: Representa el detalle de cada producto en la proforma.
+          3. Hospital.cs: Representa al hospital al que se le va proformar.
+          4. Menu.cs: Contiene los datos para mostrar y ocultar algunas viñetas en base al rol de usuario.
+          5. Negocio.cs: Representa la información de las 3 empresas.
+          6. NumeroCorrelativo.cs: -----.
+          7. Producto.cs: Representa las informacion de los medicamentos ya agregados.
+          8. Proforma.cs: Representa los datos de la proforma creada.
+          9. Rol.cs: Representa el rol del usuario.
+          10. RolMenu.cs: Representa el rol del menu.
+          11. TipoProforma.cs: Representa los diferentes tipos de proforma.
+          12. Usuario.cs: Representa los usuarios creados y sus roles.
+    
+    </details>
+ 
+  <details>
+    <summary> SistemaDeProforma.IOC</summary>
+    
+          Contiene las dependencias.
+    
+    </details>
 
 # Instalación
 ### **Requisitos previos:**
