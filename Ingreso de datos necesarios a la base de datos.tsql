@@ -1,0 +1,108 @@
+
+--________________________________ INSERTAR ROLES ________________________________
+insert into Rol(Descripcion,Activo) values
+('Administrador',1),
+('Empleado',1),
+('Supervisor',1)
+
+
+--________________________________ INSERTAR USUARIO ________________________________
+SELECT * FROM Usuario
+--clave : 123
+insert into Usuario(nombre,correo,telefono,idRol,urlFoto,nombreFoto,clave,esActivo) values
+('ß','freddmoreno1999@gmail.com','+593 0969975000','1','https://firebasestorage.googleapis.com/v0/b/miproformador.appspot.com/o/IMAGENES_USUARIO%2F6411e7e7066b4ee1aced976826d7df2c.JPG?alt=media&token=2bc7b462-1bc5-4720-befc-7d848b8cc186','6411e7e7066b4ee1aced976826d7df2c.JPG','a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3','1')
+
+--________________________________ RECURSOS DE FIREBASE_STORAGE Y CORREO ________________________________
+--(INCLUIR CLAVES Y CRENDENCIALES)
+
+insert into Configuracion(Recurso,Propiedad,Valor) values
+('FireBase_Storage','email','freddmoreno1999@gmail.com'),
+('FireBase_Storage','clave','Patatas1_1'),
+('FireBase_Storage','ruta','miproformador.appspot.com'),
+('FireBase_Storage','api_key','AIzaSyBGYYukchdH3nMX_DCs6iBB7dauzlj6Bjo'),
+('FireBase_Storage','carpeta_usuario','IMAGENES_USUARIO'),
+('FireBase_Storage','carpeta_producto','IMAGENES_PRODUCTO'),
+('FireBase_Storage','carpeta_logo','IMAGENES_LOGO')
+
+insert into Configuracion(recurso,propiedad,valor) values
+('Servicio_Correo','correo','freddmoreno1999@gmail.com'),
+('Servicio_Correo','clave','bfxjvtbfnacboeij'),
+('Servicio_Correo','alias','PROFORMADOR WEB'),
+('Servicio_Correo','host','smtp.gmail.com'),
+('Servicio_Correo','puerto','587')
+
+
+--________________________________ INSERTAR NEGOCIO ________________________________
+select * from Negocio
+
+insert into Negocio(IdNegocio,UrlLogo,NombreLogo,NumeroDocumento,Nombre,Correo,Direccion,Telefono,Ruc)
+values(1,'https://firebasestorage.googleapis.com/v0/b/miproformador.appspot.com/o/IMAGENES_LOGO%2F592c3b5873024a72b1c692b2d89f8fb9.jpg?alt=media&token=fd9af4d1-b8fc-42fd-9e3e-2109016ba89a','592c3b5873024a72b1c692b2d89f8fb9.jpg','Guayaquil-Ecuador','GMC','gmmoreno@hotmail.es','Ciudadela Nueve de Octubre Mz.44(Frente al Colegio Eloy Alfaro)','042423304 - 0997957060','0908670441001')
+values(2,'https://firebasestorage.googleapis.com/v0/b/miproformador.appspot.com/o/IMAGENES_LOGO%2F44540db66ecd44c28fcd8a4177ef9d75.JPG?alt=media&token=b0dcaac9-f3e4-471c-a946-46de208e6fea','44540db66ecd44c28fcd8a4177ef9d75.JPG','Guayaquil','IMSUMED','imsumedguayaquil@gmail.com','Victor Manuel Rendón y general Cordóva','042499573','0922262530001')
+values(3,'https://firebasestorage.googleapis.com/v0/b/miproformador.appspot.com/o/IMAGENES_LOGO%2F76985ebdb0f14e348e136359c594e9ea.JPG?alt=media&token=04d87afb-f2c5-42db-adcb-fbe9bdefcf57','76985ebdb0f14e348e136359c594e9ea.JPG','Guayaquil','GERMEDIC','germedicguayaquil@gmail.com','Ciudadela.9 de octubre av. 3era y calle 6ta #400','042555192','0992259213001')
+
+
+
+
+--________________________________ INSERTAR TIPO PROFORMA ________________________________
+
+select * from TipoProforma
+
+insert into TipoDocumentoVenta(Descripcion,Activo) values
+('Infima Cuantia',1),
+('General',1),
+('Contratación',1),
+('Subasta',1)
+
+--________________________________ INSERTAR NUMERO CORRELATIVO ________________________________
+select * from NumeroCorrelativo
+--000001
+insert into NumeroCorrelativo(UltimoNumero,CantidadDigitos,Gestion,fechaActualizacion) values
+(0,6,'Proforma',getdate())
+
+
+--________________________________ INSERTAR MENUS ________________________________
+select * from Menu
+
+
+
+insert into Menu(Descripcion,IdMenuPadre,Icono,Controlador,PaginaAccion,Activo) values
+('Analisis','1','fas fa-fw fa-tachometer-alt','Analisis','Index',1),
+('Administración','2','fas fa-fw fa-cog','NULL','NULL',1),
+('Registros','3','fas fa-fw fa-clipboard-list','NULL','NULL',1),
+('Proformar','4','fas fa-fw fa-tags','NULL','NULL',1),
+('Reportes','5','fas fa-fw fa-chart-area','NULL','NULL',1),
+('Usuarios','2','NULL','Usuarios','Index',1),
+('Empresas','2','NULL','Empresas','Index',1),
+('Hospitales','3','NULL','Hospitales','Index',1),
+('Medicamentos','3','NULL','Medicamentos','Index',1),
+('Proformador3K','4','NULL','Proformar','NuevaProforma',1),
+('Historial','4','NULL','Proformar','HistorialProforma',1),
+('Reporte de Proformas','5','NULL','ReporteProformas','Index',1),
+
+
+
+
+--________________________________ INSERTAR ROL MENU ________________________________
+select * from Menu
+select * from RolMenu
+SELECT * FROM ROL
+
+--*administrador
+INSERT INTO RolMenu(IdRol,IdMenu,Activo) values
+(1,1,1),
+(1,6,1),
+(1,7,1),
+(1,8,1),
+(1,9,1),
+(1,10,1),
+(1,11,1),
+(1,12,1), 
+(2,8,1),
+(2,9,1),
+(2,10,1),
+(2,11,1),
+(3,7,1),
+(3,8,1),
+(3,9,1),
+(3,10,1),
+(3,11,1)

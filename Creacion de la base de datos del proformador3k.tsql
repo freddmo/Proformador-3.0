@@ -1,0 +1,184 @@
+
+create database DBVENTA
+
+go
+
+use DBVENTA
+
+go
+
+create table Menu(
+IdMenu int primary key identity(1,1),
+Descripcion varchar(30),
+IdMenuPadre int references Menu(idMenu),
+Icono varchar(30),
+Controlador varchar(30),
+PaginaAccion varchar(30),
+Activo bit,
+FechaRegistro datetime default getdate()
+)
+
+go
+
+create table Rol(
+IdRol int primary key identity(1,1),
+Descripcion varchar(30),
+Activo bit,
+FechaRegistro datetime default getdate()
+)
+
+go
+ 
+ create table RolMenu(
+ IdRolMenu int primary key identity(1,1),
+ IdRol int references Rol(idRol),
+ IdMenu int references Menu(idMenu),
+ Activo bit,
+ FechaRegistro datetime default getdate()
+ )
+
+go
+
+create table Usuario(
+IdUsuario int primary key identity(1,1),
+Nombre varchar(50),
+Correo varchar(50),
+Telefono varchar(50),
+IdRol int references Rol(idRol),
+UrlFoto varchar(500),
+NombreFoto varchar(100),
+Clave varchar(100),
+Activo bit,
+FechaRegistro datetime default getdate()
+)
+
+go
+
+create table Hospital(
+IdHospital int primary key identity(1,1),
+Ruc varchar(40),
+Hospital varchar(200),
+Direccion varchar(400),
+Canton varchar(30),
+Activo bit,
+FechaRegistro datetime default getdate()
+)
+
+go
+
+create table Producto(
+IdProducto int primary key identity(1,1),
+Medicamento varchar(200),
+FF varchar(100),
+Concentracion varchar(150),
+Presentacion varchar(100),
+DC varchar(400),
+FC varchar(170),
+Iva decimal(10,2),
+cpcvalor varchar(20),
+Cum varchar(20),
+Activo bit,
+fechaRegistro datetime default getdate()
+)
+
+go
+
+create table NumeroCorrelativo(
+IdNumeroCorrelativo int primary key identity(1,1),
+UltimoNumero int,
+CantidadDigitos int,
+Gestion varchar(100),
+FechaActualizacion datetime
+)
+
+go
+
+create table TipoProforma(
+IdTipoProforma int primary key identity(1,1),
+Descripcion varchar(50),
+Activo bit,
+FechaRegistro datetime default getdate()
+)
+
+go
+
+create table Proforma(
+IdProforma int primary key identity(1,1),
+NumeroProforma varchar(6),
+IdTipoProforma int references TipoProforma(IdTipoProforma),
+IdUsuario int references Usuario(IdUsuario),
+Codigo_Infima varchar(50),
+Cvp varchar(70),
+Fpago varchar(70),
+Gtecnica varchar(70),
+Obervacion varchar(500),
+EtiquetaGMC varchar(70),
+EtiquetaIMS varchar(70),
+EtiquetaGER varchar(70),
+TiempoEntregaGMC varchar(70),
+TiempoEntregaIMS varchar(70),
+TiempoEntregaGER varchar(70),
+Fecha_Detalle datetime,
+SubtotalGMC decimal(18,5),
+SubtotalIMS decimal(18,5),
+SubtotalGER decimal(18,5),
+IvaTotalGMC decimal(18,5),
+IvaTotalIMS decimal(18,5),
+IvaTotalGER decimal(18,5),
+TotalGMC decimal(18,5),
+TotalIMS decimal(18,5),
+TotalGER decimal(18,5),
+RazonSocial varchar(200),
+RucRS varchar(40),
+DireccionRS varchar(400),
+CantonRS varchar(30),
+DetalleTipoEmpresa varchar(10),
+FechaRegistro datetime default getdate()
+)
+
+go
+
+create table DetalleProductoProforma(
+IdDetalleProforma int primary key identity(1,1),
+IdProforma int references Proforma(IdProforma),
+IdProducto int,
+Cpc varchar(20),
+Cum varchar(20),
+Medicamento varchar(200),
+FF varchar(100),
+Concentracion varchar(150),
+Presentacion varchar(100),
+DC varchar(400),
+FC varchar(170),
+Iva decimal(18,5),
+Cantidad int,
+PrecioGMC decimal(18,5),
+PrecioIMS decimal(18,5),
+PrecioGER decimal(18,5),
+TotalUGMC decimal(18,5),
+TotalUIMS decimal(18,5),
+TotalUGER decimal(18,5)
+)
+
+go
+
+create table Negocio(
+IdNegocio int primary key,
+UrlLogo varchar(500),
+NombreLogo varchar(100),
+NumeroDocumento varchar(50),
+Nombre varchar(50),
+Correo varchar(50),
+Direccion varchar(150),
+Telefono varchar(50),
+Ruc varchar(50)
+)
+
+go
+
+create table Configuracion(
+Recurso varchar(50),
+Propiedad varchar(50),
+Valor varchar(60)
+)
+
