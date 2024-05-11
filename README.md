@@ -112,7 +112,7 @@ las viñetas/secciones/codigo chtml que hacen referencia a una seccion de report
      - **Adquirir**: Obtiene información de la empresa GERMEDIC.
      - **GuardarCambios**: Edita y guarda cambios en la información de la empresa GMC.
      - **GCIMS**: Edita y guarda cambios en la información de la empresa IMSUMED.
-     - **GCGER**: Edita y guarda cambios en la información de la empresa Germedic.
+     
      - 
 
   **IProductoService.cs**
@@ -132,7 +132,7 @@ las viñetas/secciones/codigo chtml que hacen referencia a una seccion de report
      - **ObtenerProforma**: Sirve como consulta para crear una proforma a partir de datos.
      - **DetalleGMC**: Obtiene información solo de la proforma hecha por la empresa GMC.
      - **DetalleIMS**: Obtiene información solo de la proforma hecha por la empresa IMSUMED.
-     - **DetalleGER**: Obtiene información solo de la proforma hecha por la empresa Germedic.
+     
      - **Reporte**: Ignorar o borrar.
      - 
 
@@ -434,11 +434,7 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
   ![IC IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/6d3838b3-2205-4d76-b280-c19aaf8be703)
 </details>
 
-<details>
-  <summary>Proforma Ínfima Cuantía GERMEDIC</summary>
-   
-  ![IC GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/a0279bc8-83b7-4a56-9bbb-1a058f0a992f)
-</details>
+
 
 #### Contratación
 <details>
@@ -453,12 +449,7 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
    ![Contratacion IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/ed1f1fe2-8f0a-4ec4-82a3-c27633150005)
 </details>
 
-<details>
-  <summary>Proforma Contratación GERMEDIC</summary>
-  
-  ![COntratacion GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/92e7fe20-d168-454a-8f1a-d00bd938398c)
 
-</details>
 
 #### General
 <details>
@@ -474,12 +465,7 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
    ![Cotizacion IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/c0ee99fc-ff66-49e0-9758-5e04334afa00)
 </details>
 
-<details>
-  <summary>Proforma Cotización GERMEDIC</summary>
 
-![Cotizacion GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/4e715772-57ac-4fa6-988b-52ee3a31a909)
-
-</details>
 
 #### Subasta
 <details>
@@ -494,12 +480,7 @@ Esta subseccion contiene las proformas creadas. Los filtros para buscar proforma
    ![Subasta IMSUMED](https://github.com/freddmo/Proformador-3.0/assets/70821494/f631f4ae-8ad8-4444-a781-b93c32105a60)
 </details>
 
-<details>
-  <summary>Proforma Subasta GERMEDIC</summary>
-  
-   ![Subasta GERMEDIC](https://github.com/freddmo/Proformador-3.0/assets/70821494/8526c8d1-41c3-4b22-a8fd-4d343be80836)
-    
-</details>
+
 
 
 
