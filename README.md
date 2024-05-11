@@ -1,6 +1,6 @@
 # Creador de Proformas
 
-El objetivo de esta pagina web es crear un documento PDF que contiene informacion de la empresa, datos de la institucion a la que se va a relaizar la proforma, detalles de los productos a ofertar, y el valor total de la proforma. 
+El objetivo de esta pagina web es crear un documento PDF que contiene informacion de la empresa FICTICIA, datos de la institucion a la que se va a relaizar la proforma, detalles de los productos a ofertar, y el valor total de la proforma. 
 
 Nota importante: Hay 2 archivos SQL adjuntos. Uno crea la base de datos, el otro ingresa informacion esencial a la base.
 las viñetas/secciones/codigo chtml que hacen referencia a una seccion de reportes analisis no estan trabajadas y seran trabajadas a futuro.
